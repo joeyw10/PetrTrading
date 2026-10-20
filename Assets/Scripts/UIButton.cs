@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class UIButton : MonoBehaviour
 {
-    // // opens the inventory screen
-    // public void Inventory() {
-    //     SceneManager.LoadScene("Inventory");
-    // }
+    [SerializeField] GameObject square;
+
+    // opens the inventory screen
+    public void Inventory() {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void OpenSquare() {
+        square.SetActive(true);
+    }
 
     // // opens the home/opens packs screen
     // public void Home() {
