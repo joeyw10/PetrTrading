@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Scriptable Objects/Inventory")]
 public class Inventory : ScriptableObject
@@ -6,12 +7,12 @@ public class Inventory : ScriptableObject
     private List<StickerInfo> myStickers;
 
     public void addSticker(StickerInfo sticker) {
-        myStickers.add(sticker);
+        myStickers.Add(sticker);
     }
 
     // edit needed probably
-    public void removeSticker(String sticker) {
-        myStickers.remove(sticker);
+    public void removeSticker(StickerInfo sticker) {
+        myStickers.Remove(sticker);
     }
 
 }
