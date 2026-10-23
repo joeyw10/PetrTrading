@@ -1,8 +1,16 @@
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 
 public class PlayerGPS : MonoBehaviour
 {
+    [Header("Testing Settings")]
+    public bool useKeyboardSimulation = true;
+    public float simulatedLatitude = 33.6405f;
+    public float simulatedLongitude = -117.8443f;
+    public float movementSpeed = 0.0001f;
+
     public double Latitude { get; private set; }
     public double Longitude { get; private set; }
 
@@ -11,7 +19,54 @@ public class PlayerGPS : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // Check whether location services are enabled.
+#if UNITY_EDITOR
+        if (useKeyboardSimulation)
+        {
+            IsReady = true;
+            Accuracy = 1f;
+
+            while (true)
+            {
+                float vertical = 0f;
+                float horizontal = 0f;
+
+                if (Keyboard.current != null)
+                {
+                    if (Keyboard.current.wKey.isPressed ||
+                        Keyboard.current.upArrowKey.isPressed)
+                        vertical = 1f;
+
+                    if (Keyboard.current.sKey.isPressed ||
+                        Keyboard.current.downArrowKey.isPressed)
+                        vertical = -1f;
+
+                    if (Keyboard.current.dKey.isPressed ||
+                        Keyboard.current.rightArrowKey.isPressed)
+                        horizontal = 1f;
+
+                    if (Keyboard.current.aKey.isPressed ||
+                        Keyboard.current.leftArrowKey.isPressed)
+                        horizontal = -1f;
+                }
+
+                simulatedLatitude +=
+                    vertical * movementSpeed * Time.deltaTime * 60f;
+
+                simulatedLongitude +=
+                    horizontal * movementSpeed * Time.deltaTime * 60f;
+
+                Latitude = simulatedLatitude;
+                Longitude = simulatedLongitude;
+
+                Debug.Log(
+                    "Simulated GPS: " + Latitude + ", " + Longitude
+                );
+
+                yield return null;
+            }
+        }
+#endif
+
         if (!Input.location.isEnabledByUser)
         {
             Debug.LogWarning(
@@ -20,23 +75,18 @@ public class PlayerGPS : MonoBehaviour
             yield break;
         }
 
-        // Request location updates.
         Input.location.Start(5f, 2f);
 
         int timeout = 20;
 
-        // Wait for the first GPS reading.
         while (Input.location.status ==
-               LocationServiceStatus.Initializing &&
-               timeout > 0)
+               LocationServiceStatus.Initializing && timeout > 0)
         {
             yield return new WaitForSeconds(1);
             timeout--;
         }
 
-        // Check whether GPS started successfully.
-        if (Input.location.status !=
-            LocationServiceStatus.Running)
+        if (Input.location.status != LocationServiceStatus.Running)
         {
             Debug.LogError(
                 "GPS failed to start or permission was denied."
@@ -46,7 +96,6 @@ public class PlayerGPS : MonoBehaviour
 
         IsReady = true;
 
-        // Continuously read the latest location.
         while (true)
         {
             LocationInfo location = Input.location.lastData;
@@ -67,6 +116,8 @@ public class PlayerGPS : MonoBehaviour
 
     private void OnDestroy()
     {
+#if !UNITY_EDITOR
         Input.location.Stop();
+#endif
     }
 }
