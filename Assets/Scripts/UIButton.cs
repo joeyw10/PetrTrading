@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class UIButton : MonoBehaviour
 {
-    [SerializeField] GameObject square;
-
     // opens the inventory screen
     public void Inventory() {
         SceneManager.LoadScene("Inventory");
@@ -15,9 +13,9 @@ public class UIButton : MonoBehaviour
         SceneManager.LoadScene("Home");
     }
 
-    // public void Map() {
-    //     SceneManager.LoadScene("Map");
-    // }
+    public void Map() {
+        SceneManager.LoadScene("Map");
+    }
 
     public void FriendList() {
         SceneManager.LoadScene("Friends");

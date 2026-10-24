@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
+  m_Name: RobberPetr
+  m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
+  stickerName: Robber
+  stickerImage: {fileID: 5759440544718198947, guid: f98324d24243946bdb53d2b27da4f801, type: 3}
+  description: 
+  rarity: 
+  stickerPrefab: {fileID: 2991533008652578890, guid: b1e36342c8a0444c38d76a62b55ea7ae, type: 3}
