@@ -821,6 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b394783ae0dde4deb923e06fefbdeec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickerPack
+  inventory: {fileID: 11400000, guid: a7b69af4b5fb945c1ac29b16ffdfc722, type: 2}
   packAnimator: {fileID: 565032460}
   randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
   stash: {fileID: 1481384377}
@@ -1341,7 +1342,7 @@ Transform:
   m_GameObject: {fileID: 1481384377}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.59, y: 2.23, z: 0}
+  m_LocalPosition: {x: 1.54, y: -2.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
