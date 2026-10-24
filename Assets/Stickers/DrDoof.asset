@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
+  m_Name: DrDoof
+  m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
+  stickerName: Dr. Doofenshmirtz
+  stickerImage: {fileID: 7313881589349410085, guid: b7346c5e4b2fb4815ba393c1a33f5128, type: 3}
+  description: stickerinator
+  rarity: Rare
+  stickerPrefab: {fileID: 0}

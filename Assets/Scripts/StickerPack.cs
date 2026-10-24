@@ -6,19 +6,28 @@ public class StickerPack : MonoBehaviour
     StickerInfo sticker2;
     StickerInfo sticker3;
     StickerInfo sticker4;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    private bool packOpened = false;
+
+    [SerializeField] private Animator packAnimator;
+
+    [SerializeField] private StickerRandomizer randomizeStickers;
+    [SerializeField] private GameObject stash;
+
+    void Start() {
+        stash.SetActive(false);
+    }
+    void Update() {
+        if(packOpened) {
+            packAnimator.Play("PackOpen");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        
+        ChooseStickers();
+        Debug.Log("Mouse down detected");
+        packOpened = true;
     }
-
-    public StickerRandomizer randomizeStickers;
 
     public void ChooseStickers()
     {
@@ -26,9 +35,16 @@ public class StickerPack : MonoBehaviour
         sticker2 = randomizeStickers.GetRandomSticker();
         sticker3 = randomizeStickers.GetRandomSticker();
         sticker4 = randomizeStickers.GetRandomSticker();
+
+        DisplayStickers();
     }
 
-    public void RevealStickers() {
+    public void DisplayStickers() {
+        Instantiate(sticker1.stickerPrefab, transform.position, transform.rotation,transform);
+        Instantiate(sticker2.stickerPrefab, transform.position, transform.rotation,transform);
+        Instantiate(sticker2.stickerPrefab, transform.position, transform.rotation,transform);
+        Instantiate(sticker2.stickerPrefab, transform.position, transform.rotation,transform);
 
+        stash.SetActive(true);
     }
 }

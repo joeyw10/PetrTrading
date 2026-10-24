@@ -16,3 +16,4 @@ MonoBehaviour:
   stickerImage: {fileID: 0}
   description: i work out
   rarity: Common
+  stickerPrefab: {fileID: 4379314929513683535, guid: ca966e977306c4b02935f5b454c56b60, type: 3}

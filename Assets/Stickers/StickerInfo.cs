@@ -7,4 +7,7 @@ public class StickerInfo : ScriptableObject
     public Sprite stickerImage;
     public string description;
     public string rarity;
+
+    // instantiate this when a sticker is selected
+    public GameObject stickerPrefab;
 }

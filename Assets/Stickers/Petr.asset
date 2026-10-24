@@ -16,3 +16,4 @@ MonoBehaviour:
   stickerImage: {fileID: 4838267980767723841, guid: 5cd8c673629454cdca18cc575f34b6ff, type: 3}
   description: the OG
   rarity: Common
+  stickerPrefab: {fileID: 6336907893252664133, guid: ad2af41c561a541e7b05e3e813fb4a2d, type: 3}
