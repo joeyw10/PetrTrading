@@ -634,81 +634,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223381675}
   m_CullTransparentMesh: 1
---- !u!1 &258859050
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 258859051}
-  - component: {fileID: 258859053}
-  - component: {fileID: 258859052}
-  m_Layer: 5
-  m_Name: Heart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &258859051
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258859050}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2105435392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105, y: 138}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &258859052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258859050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -205270267638800340, guid: 5b6ffbd7216f64ae390527daf488fbd9, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &258859053
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258859050}
-  m_CullTransparentMesh: 1
 --- !u!1 &295776821
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,13 +730,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372338775}
+  - component: {fileID: 372338776}
   m_Layer: 5
   m_Name: Page 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &372338775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -830,9 +756,33 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 23.255, y: 28.48}
+  m_SizeDelta: {x: 625.88, y: 751.09}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &372338776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372338774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 50
+    m_Right: 0
+    m_Top: 30
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 275}
+  m_Spacing: {x: 135, y: 120}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &433128312
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +794,7 @@ GameObject:
   - component: {fileID: 433128313}
   - component: {fileID: 433128315}
   - component: {fileID: 433128314}
-  - component: {fileID: 433128316}
+  - component: {fileID: 433128317}
   m_Layer: 5
   m_Name: Shrek Petr
   m_TagString: Untagged
@@ -864,11 +814,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2105435392}
+  m_Father: {fileID: 1727817206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 99, y: -125}
+  m_AnchoredPosition: {x: 485, y: -167.5}
   m_SizeDelta: {x: 200, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433128314
@@ -909,7 +859,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433128312}
   m_CullTransparentMesh: 1
---- !u!114 &433128316
+--- !u!114 &433128317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -918,10 +868,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 433128312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
   stickerRarity: 4
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &450991649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +960,7 @@ GameObject:
   - component: {fileID: 478295767}
   - component: {fileID: 478295769}
   - component: {fileID: 478295768}
-  - component: {fileID: 478295770}
+  - component: {fileID: 478295771}
   m_Layer: 5
   m_Name: Phineas Petr
   m_TagString: Untagged
@@ -1032,7 +984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -213}
+  m_AnchoredPosition: {x: 485, y: -562.5}
   m_SizeDelta: {x: 200, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478295768
@@ -1073,7 +1025,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478295766}
   m_CullTransparentMesh: 1
---- !u!114 &478295770
+--- !u!114 &478295771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1082,10 +1034,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 478295766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
-  stickerRarity: 3
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
+  stickerRarity: 2
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &520642606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1479,7 @@ GameObject:
   - component: {fileID: 697932675}
   - component: {fileID: 697932677}
   - component: {fileID: 697932676}
-  - component: {fileID: 697932678}
+  - component: {fileID: 697932679}
   m_Layer: 5
   m_Name: Gym Petr
   m_TagString: Untagged
@@ -1549,7 +1503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -84, y: -214}
+  m_AnchoredPosition: {x: 150, y: -562.5}
   m_SizeDelta: {x: 200, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697932676
@@ -1590,7 +1544,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697932674}
   m_CullTransparentMesh: 1
---- !u!114 &697932678
+--- !u!114 &697932679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1599,10 +1553,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 697932674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
   stickerRarity: 1
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &730230168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2250,7 @@ GameObject:
   - component: {fileID: 1092253549}
   - component: {fileID: 1092253551}
   - component: {fileID: 1092253550}
-  - component: {fileID: 1092253552}
+  - component: {fileID: 1092253553}
   m_Layer: 5
   m_Name: Robbr Petr
   m_TagString: Untagged
@@ -2316,10 +2272,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 372338775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -96.86499, y: 177.1695}
-  m_SizeDelta: {x: 200, y: 250}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092253550
 MonoBehaviour:
@@ -2359,7 +2315,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092253548}
   m_CullTransparentMesh: 1
---- !u!114 &1092253552
+--- !u!114 &1092253553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2368,10 +2324,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092253548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
   stickerRarity: 2
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &1102540823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2554,19 @@ MonoBehaviour:
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1695127016}
+        m_TargetAssemblyTypeName: BinderSwipeController, Assembly-CSharp
+        m_MethodName: OnDropdownValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1110436438
 MonoBehaviour:
@@ -2847,7 +2817,7 @@ GameObject:
   - component: {fileID: 1234521643}
   - component: {fileID: 1234521645}
   - component: {fileID: 1234521644}
-  - component: {fileID: 1234521646}
+  - component: {fileID: 1234521647}
   m_Layer: 5
   m_Name: OG Petr
   m_TagString: Untagged
@@ -2871,7 +2841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -86, y: 177.1695}
+  m_AnchoredPosition: {x: 150, y: -167.5}
   m_SizeDelta: {x: 200, y: 275}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234521644
@@ -2912,7 +2882,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234521642}
   m_CullTransparentMesh: 1
---- !u!114 &1234521646
+--- !u!114 &1234521647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2921,10 +2891,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234521642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
   stickerRarity: 1
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &1272920239
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,7 +3701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 534.17, y: -1143}
+  m_AnchoredPosition: {x: 534.17, y: -1118}
   m_SizeDelta: {x: 800, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1695127014
@@ -3789,6 +3761,8 @@ MonoBehaviour:
   stickerPages:
   - {fileID: 1727817205}
   - {fileID: 372338774}
+  rarityDropdown: {fileID: 1110436437}
+  page1Container: {fileID: 1727817206}
 --- !u!1 &1727817205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3798,13 +3772,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1727817206}
+  - component: {fileID: 1727817207}
   m_Layer: 5
   m_Name: Page 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1727817206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3818,16 +3793,40 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1234521643}
-  - {fileID: 2105435392}
+  - {fileID: 433128313}
   - {fileID: 697932675}
   - {fileID: 478295767}
   m_Father: {fileID: 1695127013}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 23.2534, y: 28.4802}
+  m_SizeDelta: {x: 625.8823, y: 751.0923}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1727817207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727817205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 50
+    m_Right: 0
+    m_Top: 30
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 275}
+  m_Spacing: {x: 135, y: 120}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1741834396
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,7 +3838,7 @@ GameObject:
   - component: {fileID: 1741834397}
   - component: {fileID: 1741834399}
   - component: {fileID: 1741834398}
-  - component: {fileID: 1741834400}
+  - component: {fileID: 1741834401}
   m_Layer: 5
   m_Name: Dr. Doof Petr
   m_TagString: Untagged
@@ -3861,10 +3860,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 372338775}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 236, y: 177.1695}
-  m_SizeDelta: {x: 200, y: 275}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741834398
 MonoBehaviour:
@@ -3904,7 +3903,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741834396}
   m_CullTransparentMesh: 1
---- !u!114 &1741834400
+--- !u!114 &1741834401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3913,10 +3912,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1741834396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9280ee12581da41f08a478d98e46593d, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d80f9b09e044e3a771869062e8622, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StickerData
+  m_EditorClassIdentifier: Assembly-CSharp::RaritySort
   stickerRarity: 3
+  originalParent: {fileID: 0}
+  originalSiblingIndex: 0
 --- !u!1 &1787810797
 GameObject:
   m_ObjectHideFlags: 0
@@ -4331,43 +4332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
---- !u!1 &2105435391
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2105435392}
-  m_Layer: 5
-  m_Name: Shrek + Heart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2105435392
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105435391}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 433128313}
-  - {fileID: 258859051}
-  m_Father: {fileID: 1727817206}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 244, y: 177.1695}
-  m_SizeDelta: {x: 200, y: 250}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
