@@ -97,6 +97,22 @@ public GameObject ignoreButton;
 clickScript.catchButton = catchButton;
 clickScript.ignoreButton = ignoreButton;
 
+if (chosenSticker == beachSticker)
+{
+    clickScript.stickerType =
+        PetrStickerClick.StickerType.Common;
+}
+else if (chosenSticker == nasaSticker)
+{
+    clickScript.stickerType =
+        PetrStickerClick.StickerType.Rare;
+}
+else
+{
+    clickScript.stickerType =
+        PetrStickerClick.StickerType.Legendary;
+}
+
         RectTransform stickerRect =
             stickerObject.GetComponent<RectTransform>();
 

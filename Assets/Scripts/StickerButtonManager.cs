@@ -4,6 +4,7 @@ using UnityEngine;
 public class StickerButtonManager : MonoBehaviour
 {
     public GameObject catchPanel;
+    public GameObject catchResultPanel;
 
     public void OpenCatchPanel()
     {
@@ -20,4 +21,8 @@ public class StickerButtonManager : MonoBehaviour
             selected.IgnoreSticker();
         }
     }
+    public void BackToMap()
+{
+    catchResultPanel.SetActive(false);
+}
 }

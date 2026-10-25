@@ -1,22 +1,74 @@
 
 using UnityEngine;
-
+using TMPro;
 public class PetrCatchManager : MonoBehaviour
 {
     public GameObject catchPanel;
+    public GameObject catchResultPanel;
+    public TMP_Text catchResultText;
 
     public void ChooseCommonAnt()
     {
-        Debug.Log("You selected the Common Ant!");
+        TryCatchSticker("Common Ant");
     }
 
     public void ChooseGoldenAnt()
     {
-        Debug.Log("You selected the Golden Ant!");
+        TryCatchSticker("Golden Ant");
     }
 
     public void ChooseDiamondAnt()
     {
-        Debug.Log("You selected the Diamond Ant!");
+        TryCatchSticker("Diamond Ant");
     }
+
+    
+private void TryCatchSticker(string antType)
+{
+    catchPanel.SetActive(false);
+
+    PetrStickerClick sticker =
+        PetrStickerClick.GetSelectedSticker();
+
+    if (sticker == null)
+    {
+        return;
+    }
+
+    bool success = false;
+
+    if (sticker.stickerType ==
+        PetrStickerClick.StickerType.Common)
+    {
+        success = true;
+    }
+    else if (sticker.stickerType ==
+             PetrStickerClick.StickerType.Rare)
+    {
+        success = antType == "Golden Ant" ||
+                  antType == "Diamond Ant";
+    }
+    else if (sticker.stickerType ==
+             PetrStickerClick.StickerType.Legendary)
+    {
+        success = antType == "Diamond Ant";
+    }
+
+    if (success)
+    {
+        catchResultText.text = "Catch successful!";
+        sticker.CatchSuccessfully();
+    }
+    else
+    {
+        catchResultText.text =
+            "Catch failed! Try a different ant.";
+
+        sticker.HideActionButtons();
+    }
+
+    catchResultPanel.SetActive(true);
+}
+
+    
 }
