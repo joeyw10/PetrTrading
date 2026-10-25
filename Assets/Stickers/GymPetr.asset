@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
   m_Name: GymPetr
   m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
-  stickerName: GymBro
-  stickerImage: {fileID: 0}
-  description: i work out
+  stickerImage: {fileID: -3850494412008527814, guid: ee771e109647b4e4b9fcb6b7cd05043b, type: 3}
   rarity: Common
+  stickerName: GymBro
+  description: i work out
   stickerPrefab: {fileID: 4379314929513683535, guid: ca966e977306c4b02935f5b454c56b60, type: 3}

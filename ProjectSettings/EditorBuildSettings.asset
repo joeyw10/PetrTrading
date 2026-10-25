@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Inventory.unity
     guid: 5d9e3f88813fe4480a1a1a7bcb466102
   - enabled: 1
+    path: Assets/Scenes/Sticker Info.unity
+    guid: 1c249f696ee04441c93a8ef921fdb13d
+  - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: adeaf1bc4be503e4d9dcee440f02b7b6
   m_configObjects:
