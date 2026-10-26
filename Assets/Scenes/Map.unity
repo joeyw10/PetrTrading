@@ -1049,6 +1049,7 @@ GameObject:
   - component: {fileID: 339646849}
   - component: {fileID: 339646848}
   - component: {fileID: 339646847}
+  - component: {fileID: 339646850}
   m_Layer: 5
   m_Name: MapViewport
   m_TagString: Untagged
@@ -1129,6 +1130,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339646845}
   m_CullTransparentMesh: 1
+--- !u!114 &339646850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339646845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee34313a83d12ea41acb942604286a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapTouchDrag
+  playerGPS: {fileID: 2136839924}
+  mapViewport: {fileID: 339646846}
+  coordinateScale: 0.00001
 --- !u!1 &396579234
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,7 +3057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab7668fc6de1494f8f909a893db7528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGPS
-  useKeyboardSimulation: 1
   simulatedLatitude: 33.6405
   simulatedLongitude: -117.8443
   movementSpeed: 0.0001
