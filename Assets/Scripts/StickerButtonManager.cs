@@ -4,11 +4,13 @@ using UnityEngine;
 public class StickerButtonManager : MonoBehaviour
 {
     public GameObject catchPanel;
+    public GameObject stickerDetectedPanel;
     public GameObject catchResultPanel;
 
     public void OpenCatchPanel()
     {
         catchPanel.SetActive(true);
+        stickerDetectedPanel.SetActive(false);
     }
 
     public void IgnoreSelectedSticker()
