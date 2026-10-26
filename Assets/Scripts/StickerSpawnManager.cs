@@ -10,7 +10,14 @@ public class StickerSpawnManager : MonoBehaviour
     public Sprite nasaSticker;
     public Sprite easterBunnySticker;
     public GameObject catchButton;
+
+    public StickerInfo beachStickerInfo;
+public StickerInfo nasaStickerInfo;
+public StickerInfo easterBunnyStickerInfo;
 public GameObject ignoreButton;
+
+public GameObject stickerDetectedPanel;
+public TMPro.TMP_Text stickerDetectedText;
 
     [Header("Map Settings")]
     public RectTransform mapTransform;
@@ -94,6 +101,12 @@ public GameObject ignoreButton;
         PetrStickerClick clickScript =
     stickerObject.AddComponent<PetrStickerClick>();
 
+    clickScript.stickerDetectedPanel =
+    stickerDetectedPanel;
+
+clickScript.stickerDetectedText =
+    stickerDetectedText;
+
 clickScript.catchButton = catchButton;
 clickScript.ignoreButton = ignoreButton;
 
@@ -101,16 +114,22 @@ if (chosenSticker == beachSticker)
 {
     clickScript.stickerType =
         PetrStickerClick.StickerType.Common;
+
+    clickScript.stickerInfo = beachStickerInfo;
 }
 else if (chosenSticker == nasaSticker)
 {
     clickScript.stickerType =
         PetrStickerClick.StickerType.Rare;
+
+    clickScript.stickerInfo = nasaStickerInfo;
 }
 else
 {
     clickScript.stickerType =
         PetrStickerClick.StickerType.Legendary;
+
+    clickScript.stickerInfo = easterBunnyStickerInfo;
 }
 
         RectTransform stickerRect =

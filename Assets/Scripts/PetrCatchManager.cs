@@ -7,6 +7,8 @@ public class PetrCatchManager : MonoBehaviour
     public GameObject catchResultPanel;
     public TMP_Text catchResultText;
 
+    public Inventory inventory;
+
     public void ChooseCommonAnt()
     {
         TryCatchSticker("Common Ant");
@@ -55,10 +57,23 @@ private void TryCatchSticker(string antType)
     }
 
     if (success)
+{
+    catchResultText.text = "Catch successful!";
+
+    if (inventory != null && sticker.stickerInfo != null)
     {
-        catchResultText.text = "Catch successful!";
-        sticker.CatchSuccessfully();
+        inventory.addSticker(sticker.stickerInfo);
+        Debug.Log("Added to inventory: " +
+                  sticker.stickerInfo.stickerName);
     }
+    else
+    {
+        Debug.LogWarning(
+            "Inventory or StickerInfo is missing!");
+    }
+
+    sticker.CatchSuccessfully();
+}
     else
     {
         catchResultText.text =

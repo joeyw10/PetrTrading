@@ -6,6 +6,8 @@ public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
 {
     public GameObject catchButton;
     public GameObject ignoreButton;
+    public GameObject stickerDetectedPanel;
+public TMPro.TMP_Text stickerDetectedText;
 
     public enum StickerType
     {
@@ -16,6 +18,8 @@ public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
 
     public StickerType stickerType;
 
+    public StickerInfo stickerInfo;
+
     private static PetrStickerClick selectedSticker;
 
     private void Start()
@@ -25,11 +29,19 @@ public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        selectedSticker = this;
-        catchButton.SetActive(true);
-        ignoreButton.SetActive(true);
-    }
+{
+    selectedSticker = this;
+
+    stickerDetectedPanel.SetActive(true);
+
+    stickerDetectedText.text =
+        stickerInfo.stickerName + " detected! What should we do?";
+
+    catchButton.SetActive(true);
+    ignoreButton.SetActive(true);
+}
+
+    
 
     public void IgnoreSticker()
     {
@@ -40,6 +52,7 @@ public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
 
         selectedSticker.catchButton.SetActive(false);
         selectedSticker.ignoreButton.SetActive(false);
+        selectedSticker.stickerDetectedPanel.SetActive(false);
 
         Destroy(selectedSticker.gameObject);
         selectedSticker = null;
