@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8560951685963155585}
   - component: {fileID: 8636056395819139208}
   - component: {fileID: 5163204480422355691}
+  - component: {fileID: 7059502012609487727}
   m_Layer: 0
   m_Name: ShrekPetr_0
   m_TagString: Untagged
@@ -104,4 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sticker
+  stickerPack: {fileID: 7805916580749155896, guid: b17fd0975155041b3b4f180b25d48939, type: 3}
   randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
+--- !u!114 &7059502012609487727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791299735109238954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sticker
+  stickerPack: {fileID: 0}
+  randomizeStickers: {fileID: 0}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6450923583931094885}
   - component: {fileID: 4328445182745992157}
   - component: {fileID: 9082798184086232813}
+  - component: {fileID: 5132803068791546978}
   m_Layer: 0
   m_Name: Robbr Petr_0
   m_TagString: Untagged
@@ -104,4 +105,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sticker
+  stickerPack: {fileID: 7805916580749155896, guid: b17fd0975155041b3b4f180b25d48939, type: 3}
   randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
+--- !u!114 &5132803068791546978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991533008652578890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sticker
+  stickerPack: {fileID: 0}
+  randomizeStickers: {fileID: 0}

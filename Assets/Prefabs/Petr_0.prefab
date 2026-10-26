@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7322412467516225816}
   - component: {fileID: 3989085470598720052}
+  - component: {fileID: 6458390157175438546}
   m_Layer: 0
   m_Name: Petr_0
   m_TagString: Untagged
@@ -91,3 +92,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6458390157175438546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336907893252664133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sticker
+  stickerPack: {fileID: 7805916580749155896, guid: b17fd0975155041b3b4f180b25d48939, type: 3}
+  randomizeStickers: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
   m_Name: DrDoof
   m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
-  stickerName: Dr. Doofenshmirtz
   stickerImage: {fileID: 7313881589349410085, guid: b7346c5e4b2fb4815ba393c1a33f5128, type: 3}
-  description: stickerinator
   rarity: Rare
-  stickerPrefab: {fileID: 0}
+  stickerName: Dr. Doofenshmirtz
+  description: stickerinator
+  stickerPrefab: {fileID: 3315590690447860066, guid: 0ee1694fe0600451a9673b2594886c2f, type: 3}

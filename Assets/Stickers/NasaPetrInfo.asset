@@ -16,4 +16,4 @@ MonoBehaviour:
   rarity: Rare
   stickerName: NASA Petr
   description: The first Petr to travel to the moon
-  stickerPrefab: {fileID: 0}
+  stickerPrefab: {fileID: 8087935714581614866, guid: 088b858e373664013a2ca704226f0cf5, type: 3}

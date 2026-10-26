@@ -16,4 +16,4 @@ MonoBehaviour:
   rarity: Common
   stickerName: Beach Petr
   description: A Petr that enjoys swimming at the beach
-  stickerPrefab: {fileID: 0}
+  stickerPrefab: {fileID: 689192612218996734, guid: 718c724eefca5469d969df641d802e84, type: 3}

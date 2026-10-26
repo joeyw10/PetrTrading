@@ -17,8 +17,8 @@ public class UIButton : MonoBehaviour
         SceneManager.LoadScene("Map");
     }
 
-    public void FriendList() {
-        SceneManager.LoadScene("Friends");
+    public void Trade() {
+        SceneManager.LoadScene("Trading");
     }
 
     // public void Trading() {

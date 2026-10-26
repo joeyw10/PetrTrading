@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: adeaf1bc4be503e4d9dcee440f02b7b6
+  - enabled: 1
+    path: Assets/Scenes/Trading.unity
+    guid: a565b6484c92f42aebc1bdf9073e04e5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
