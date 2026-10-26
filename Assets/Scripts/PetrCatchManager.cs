@@ -7,6 +7,8 @@ public class PetrCatchManager : MonoBehaviour
     public GameObject catchResultPanel;
     public TMP_Text catchResultText;
 
+    public GameObject stickerDetectedPanel;
+
     public Inventory inventory;
 
     public void ChooseCommonAnt()
@@ -27,7 +29,20 @@ public class PetrCatchManager : MonoBehaviour
     
 private void TryCatchSticker(string antType)
 {
+    Debug.Log("TryCatchSticker is running!");
     catchPanel.SetActive(false);
+
+    if (stickerDetectedPanel != null)
+{
+    stickerDetectedPanel.SetActive(false);
+
+    Debug.Log("StickerDetectedPanel active: "
+        + stickerDetectedPanel.activeSelf);
+}
+else
+{
+    Debug.LogWarning("StickerDetectedPanel is not assigned!");
+}
 
     PetrStickerClick sticker =
         PetrStickerClick.GetSelectedSticker();
@@ -83,6 +98,7 @@ private void TryCatchSticker(string antType)
     }
 
     catchResultPanel.SetActive(true);
+    
 }
 
     
