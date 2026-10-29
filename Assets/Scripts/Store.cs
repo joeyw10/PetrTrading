@@ -1,7 +1,9 @@
 using UnityEngine;
+using TMPro;
 
 public class Store : MonoBehaviour
 {
+    [SerializeField] GameObject StickerPackObjects;
     [SerializeField] GameObject StoreModal;
     [SerializeField] GameObject PacksTab;
     [SerializeField] GameObject AntsTab;
@@ -22,14 +24,28 @@ public class Store : MonoBehaviour
     }
 
     public void CloseStore() {
+        StickerPackObjects.SetActive(true);
         StoreModal.SetActive(false);
     }
 
     public void OpenStore() {
+        StickerPackObjects.SetActive(false);
         StoreModal.SetActive(true);
     }
 
     [SerializeField] Inventory inventory;
+    [SerializeField] private TMP_Text numPacks;
+    [SerializeField] private TMP_Text numCommon;
+    [SerializeField] private TMP_Text numGolden;
+    [SerializeField] private TMP_Text numDiamond;
+
+    void Update()
+    {
+        numPacks.text = inventory.getStickerPacks().ToString() + " Packs Left";
+        numCommon.text = inventory.getCommonAnts().ToString();
+        numGolden.text = inventory.getGoldenAnts().ToString();
+        numDiamond.text = inventory.getDiamondAnts().ToString();
+    }
 
     // buying packs
     public void Purchase1Pack() {

@@ -11,7 +11,7 @@ public class ScoreDisplay : MonoBehaviour
 
     void Update()
     {
-        numPacks.text = inventory.getStickerPacks().ToString();
+        numPacks.text = inventory.getStickerPacks().ToString() + " Packs Left";
         numCommon.text = inventory.getCommonAnts().ToString();
         numGolden.text = inventory.getGoldenAnts().ToString();
         numDiamond.text = inventory.getDiamondAnts().ToString();
