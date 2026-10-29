@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sticker : MonoBehaviour
 {
-    [SerializeField] private StickerPack stickerPack;
+    //[SerializeField] private StickerPack stickerPack;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,8 +17,8 @@ public class Sticker : MonoBehaviour
 
     public StickerRandomizer randomizeStickers;
 
-    public void OnMouseDown()
-    {
-        stickerPack.SwapStickers();
-    }
+    // public void OnMouseDown()
+    // {
+    //     stickerPack.SwapStickers();
+    // }
 }

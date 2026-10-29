@@ -8,6 +8,12 @@ public class Inventory : ScriptableObject
     // IS FOR THE PROTOTYPE
     public List<StickerInfo> myStickers;
 
+    private int commonAnts;
+    private int goldenAnts;
+    private int diamondAnts;
+
+    private int stickerPacks;
+
     public void addSticker(StickerInfo sticker) {
         myStickers.Add(sticker);
     }
@@ -15,6 +21,42 @@ public class Inventory : ScriptableObject
     // edit needed probably
     public void removeSticker(StickerInfo sticker) {
         myStickers.Remove(sticker);
+    }
+
+    public int getCommonAnts() {
+        return commonAnts;
+    }
+
+    // when using this, positive number adds while negative subtracts
+    public void setCommonAnts(int antModifier) {
+        commonAnts = commonAnts + antModifier;
+    }
+
+    public int getGoldenAnts() {
+        return goldenAnts;
+    }
+
+    // when using this, positive number adds while negative subtracts
+    public void setGoldenAnts(int antModifier) {
+        goldenAnts = goldenAnts + antModifier;
+    }
+
+    public int getDiamondAnts() {
+        return diamondAnts;
+    }
+
+    // when using this, positive number adds while negative subtracts
+    public void setDiamondAnts(int antModifier) {
+        diamondAnts = diamondAnts + antModifier;
+    }
+
+    public int getStickerPacks() {
+        return stickerPacks;
+    }
+
+    // when using this, positive number adds while negative subtracts
+    public void setStickerPacks(int packsModifier) {
+        stickerPacks = stickerPacks + packsModifier;
     }
 
 }
