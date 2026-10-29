@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: be0ff70802fd640799b991408349a179
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2594826886580963595
+    second: Common Ants 1_0
+  - first:
+      213: 4222941337291087903
+    second: Common Ants 1_1
+  - first:
+      213: -8675881535002491188
+    second: Common Ants 1_2
+  - first:
+      213: 6160181269414827078
+    second: Common Ants 1_3
+  - first:
+      213: 8285523032484333563
+    second: Common Ants 1_4
+  - first:
+      213: 3746936833463299357
+    second: Common Ants 1_5
+  - first:
+      213: 7093786425957731791
+    second: Common Ants 1_6
+  - first:
+      213: -6476467016551319020
+    second: Common Ants 1_7
+  - first:
+      213: -1523364448542712409
+    second: Common Ants 1_8
+  - first:
+      213: 36311475832346895
+    second: Common Ants 1_9
+  - first:
+      213: -568186210565358217
+    second: Common Ants 1_10
+  - first:
+      213: -8232102234376473587
+    second: Common Ants 1_11
+  - first:
+      213: 3759833107677680714
+    second: Common Ants 1_12
+  - first:
+      213: 6730892905883268678
+    second: Common Ants 1_13
+  - first:
+      213: 862873511814964979
+    second: Common Ants 1_14
+  - first:
+      213: 3448808910651778132
+    second: Common Ants 1_15
+  - first:
+      213: 3784513717272902540
+    second: Common Ants 1_16
+  - first:
+      213: -3121462506242421394
+    second: Common Ants 1_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Common Ants 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 194
+        width: 495
+        height: 496
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f675b3d1b25dfbd0800000000000000
+      internalID: -2594826886580963595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 92
+        width: 34
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f106c8ca5c6ea9a30800000000000000
+      internalID: 4222941337291087903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_2
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 94
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc64ec0f5b3199780800000000000000
+      internalID: -8675881535002491188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 92
+        width: 55
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6445c7bf93c5d7550800000000000000
+      internalID: 6160181269414827078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_4
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 92
+        width: 55
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf7cb89ac471cf270800000000000000
+      internalID: 8285523032484333563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_5
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 94
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1d286aa23bcff330800000000000000
+      internalID: 3746936833463299357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_6
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 92
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcdc2bf7b21327260800000000000000
+      internalID: 7093786425957731791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_7
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 90
+        width: 38
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41abceeef87fe16a0800000000000000
+      internalID: -6476467016551319020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_8
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 91
+        width: 42
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ad172dea1cebdae0800000000000000
+      internalID: -1523364448542712409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_9
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 91
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f09d14a4811018000800000000000000
+      internalID: 36311475832346895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_10
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 92
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77df9f0e6a56d18f0800000000000000
+      internalID: -568186210565358217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_11
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 13
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d047a4522a2b1cd80800000000000000
+      internalID: -8232102234376473587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_12
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 14
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4491ed7a4c9d2430800000000000000
+      internalID: 3759833107677680714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_13
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 9
+        width: 26
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6467e54af6fe86d50800000000000000
+      internalID: 6730892905883268678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_14
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 13
+        width: 27
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f623d523ea89fb00800000000000000
+      internalID: 862873511814964979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_15
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 13
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 454e9918e61acdf20800000000000000
+      internalID: 3448808910651778132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_16
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 13
+        width: 27
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8bf4a5bc2b458430800000000000000
+      internalID: 3784513717272902540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Common Ants 1_17
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 13
+        width: 27
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d48b783665ea4d0800000000000000
+      internalID: -3121462506242421394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Common Ants 1_0: -2594826886580963595
+      Common Ants 1_1: 4222941337291087903
+      Common Ants 1_10: -568186210565358217
+      Common Ants 1_11: -8232102234376473587
+      Common Ants 1_12: 3759833107677680714
+      Common Ants 1_13: 6730892905883268678
+      Common Ants 1_14: 862873511814964979
+      Common Ants 1_15: 3448808910651778132
+      Common Ants 1_16: 3784513717272902540
+      Common Ants 1_17: -3121462506242421394
+      Common Ants 1_2: -8675881535002491188
+      Common Ants 1_3: 6160181269414827078
+      Common Ants 1_4: 8285523032484333563
+      Common Ants 1_5: 3746936833463299357
+      Common Ants 1_6: 7093786425957731791
+      Common Ants 1_7: -6476467016551319020
+      Common Ants 1_8: -1523364448542712409
+      Common Ants 1_9: 36311475832346895
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -55,10 +55,10 @@ public class StickerPack : MonoBehaviour
         DisplayStickers();
     }
 
-    private Vector3 spawnPosition1 = new Vector3(0, 0, 5);
-    private Vector3 spawnPosition2 = new Vector3(0, 0, 4);
-    private Vector3 spawnPosition3 = new Vector3(0, 0, 3);
-    private Vector3 spawnPosition4 = new Vector3(0, 0, 2);
+    private Vector3 spawnPosition1 = new Vector3(-0.6f, 0.9f, 5);
+    private Vector3 spawnPosition2 = new Vector3(0.4f, 0.9f, 4);
+    private Vector3 spawnPosition3 = new Vector3(-0.6f, -1.2f, 3);
+    private Vector3 spawnPosition4 = new Vector3(0.4f, -1.2f, 2);
 
     public void DisplayStickers() {
         stickerPrefab1 = Instantiate(sticker1.stickerPrefab, spawnPosition1, transform.rotation,transform);
@@ -69,29 +69,30 @@ public class StickerPack : MonoBehaviour
         stash.SetActive(true);
     }
 
-    public void SwapStickers() {
-        if(stickerPrefab1.transform.position.z == 5) {
-            stickerPrefab1.transform.position += new Vector3(0, 0, -3);
-            stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-        } else if(stickerPrefab2.transform.position.z == 5) {
-            stickerPrefab2.transform.position += new Vector3(0, 0, -3);
-            stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-        } else if(stickerPrefab3.transform.position.z == 5) {
-            stickerPrefab3.transform.position += new Vector3(0, 0, -3);
-            stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-        } else if(stickerPrefab4.transform.position.z == 5) {
-            stickerPrefab4.transform.position += new Vector3(0, 0, -3);
-            stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-            stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-        } else {
-            Debug.Log("Broken.");
-        }
-    }
+    // this didn't work so im giving up
+    // public void SwapStickers() {
+    //     if(stickerPrefab1.transform.position.z == 5) {
+    //         stickerPrefab1.transform.position += new Vector3(0, 0, -3);
+    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
+    //     } else if(stickerPrefab2.transform.position.z == 5) {
+    //         stickerPrefab2.transform.position += new Vector3(0, 0, -3);
+    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
+    //     } else if(stickerPrefab3.transform.position.z == 5) {
+    //         stickerPrefab3.transform.position += new Vector3(0, 0, -3);
+    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
+    //     } else if(stickerPrefab4.transform.position.z == 5) {
+    //         stickerPrefab4.transform.position += new Vector3(0, 0, -3);
+    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
+    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
+    //     } else {
+    //         Debug.Log("Broken.");
+    //     }
+    // }
 }
