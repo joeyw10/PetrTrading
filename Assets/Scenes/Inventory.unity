@@ -4313,6 +4313,7 @@ MonoBehaviour:
   - {fileID: 372338774}
   stickersPerPage: 4
   rarityDropdown: {fileID: 1110436437}
+  searchInput: {fileID: 1272920241}
   favoritedButtonImage: {fileID: 0}
   newestButtonImage: {fileID: 0}
   buttonOnColor: {r: 1, g: 0.85, b: 0.4, a: 1}

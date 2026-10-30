@@ -25,6 +25,9 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     [Tooltip("Drag your Rarity Dropdown GameObject here.")]
     [SerializeField] private TMP_Dropdown rarityDropdown;
 
+    [Tooltip("Drag your Search Bar's input field here (the one you type into).")]
+    [SerializeField] private TMP_InputField searchInput;
+
     [Header("Button Looks (optional)")]
     [Tooltip("Drag the Favorited / Newest button Images here to tint them while they are on.")]
     [SerializeField] private Image favoritedButtonImage;
@@ -37,12 +40,23 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     private Vector2 _pointerStartPosition;
     private bool _favoritesOnly = false;
     private bool _newestFirst = false;
+    private string _searchText = "";
 
     private void Start()
     {
         _binderImage = GetComponent<Image>();
         UpdatePageVisuals();
         UpdateButtonLooks();
+
+        // Re-filter every time the player types a letter (no manual OnValueChanged hookup needed)
+        if (searchInput != null)
+            searchInput.onValueChanged.AddListener(OnSearchChanged);
+    }
+
+    private void OnSearchChanged(string text)
+    {
+        _searchText = text == null ? "" : text.Trim().ToLower();
+        ApplyFilters();
     }
 
     // ---------- Swiping ----------
@@ -166,7 +180,8 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
 
         string selectedOption = rarityDropdown.options[rarityDropdown.value].text.ToLower().Trim();
         bool rarityFilterOn = !(selectedOption == "all" || selectedOption == "all rarities");
-        bool anyOn = rarityFilterOn || _favoritesOnly || _newestFirst;
+        bool searchOn = _searchText.Length > 0;
+        bool anyOn = rarityFilterOn || _favoritesOnly || _newestFirst || searchOn;
 
         RaritySort[] allStickers = transform.parent.GetComponentsInChildren<RaritySort>(true);
 
@@ -192,8 +207,11 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
                 bool matchesRarity = !rarityFilterOn ||
                                      sticker.stickerRarity.ToString().ToLower() == selectedOption;
                 bool matchesFavorite = !_favoritesOnly || sticker.IsFavorited;
+                bool matchesSearch = !searchOn || (sticker.stickerData != null &&
+                                     sticker.stickerData.stickerName != null &&
+                                     sticker.stickerData.stickerName.ToLower().Contains(_searchText));
 
-                if (matchesRarity && matchesFavorite) matches.Add(sticker);
+                if (matchesRarity && matchesFavorite && matchesSearch) matches.Add(sticker);
                 else sticker.gameObject.SetActive(false);
             }
 
