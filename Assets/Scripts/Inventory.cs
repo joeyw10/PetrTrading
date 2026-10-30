@@ -16,6 +16,9 @@ public class Inventory : ScriptableObject
 
     public void addSticker(StickerInfo sticker) {
         myStickers.Add(sticker);
+
+        // Remember the date this sticker was first added (used by the "Newest" sort)
+        StickerDates.RecordAdded(sticker);
     }
 
     // edit needed probably

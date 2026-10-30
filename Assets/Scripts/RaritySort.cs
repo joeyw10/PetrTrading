@@ -37,6 +37,21 @@ public class RaritySort : MonoBehaviour, IPointerClickHandler
         StickerFavorites.Toggle(stickerData);
     }
 
+    // ---------- Date added (stored by StickerDates) ----------
+    // Bigger number = added more recently. 0 = no date was ever recorded.
+    public long AddedTicks
+    {
+        get { return StickerDates.GetAddedTicks(stickerData); }
+    }
+
+    // For testing: right-click the component header in the Inspector during Play mode
+    // to stamp this sticker as "added right now" (only works the first time).
+    [ContextMenu("Stamp As Added Now")]
+    public void StampAddedNow()
+    {
+        StickerDates.RecordAdded(stickerData);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (stickerData != null)

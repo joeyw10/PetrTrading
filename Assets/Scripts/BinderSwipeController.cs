@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -16,29 +18,31 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     [Tooltip("Drag your Page1 and Page2 GameObjects here in order.")]
     public GameObject[] stickerPages;
 
+    [Tooltip("How many stickers fit on one page (a 2x2 grid = 4).")]
+    [SerializeField] private int stickersPerPage = 4;
+
     [Header("Filter Settings")]
     [Tooltip("Drag your Rarity Dropdown GameObject here.")]
     [SerializeField] private TMP_Dropdown rarityDropdown;
 
-    [Tooltip("Drag the 'Page 1' GameObject from your Hierarchy here.")]
-    [SerializeField] private Transform page1Container;
-
-    [Header("Favorited Button (optional look)")]
-    [Tooltip("Drag the Favorited button's Image here to tint it while the filter is on.")]
+    [Header("Button Looks (optional)")]
+    [Tooltip("Drag the Favorited / Newest button Images here to tint them while they are on.")]
     [SerializeField] private Image favoritedButtonImage;
-    [SerializeField] private Color favoritedOnColor = new Color(1f, 0.85f, 0.4f);
-    [SerializeField] private Color favoritedOffColor = Color.white;
+    [SerializeField] private Image newestButtonImage;
+    [SerializeField] private Color buttonOnColor = new Color(1f, 0.85f, 0.4f);
+    [SerializeField] private Color buttonOffColor = Color.white;
 
     private Image _binderImage;
     private int _currentPageIndex = 0;
     private Vector2 _pointerStartPosition;
     private bool _favoritesOnly = false;
+    private bool _newestFirst = false;
 
     private void Start()
     {
         _binderImage = GetComponent<Image>();
         UpdatePageVisuals();
-        UpdateFavoritedButtonLook();
+        UpdateButtonLooks();
     }
 
     // ---------- Swiping ----------
@@ -101,74 +105,131 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         }
     }
 
-    // ---------- Filtering ----------
-    // Hook this to the Rarity Dropdown's "On Value Changed" event (same as before).
+    // ---------- Button hooks ----------
+    // Rarity Dropdown -> On Value Changed
     public void OnDropdownValueChanged()
     {
         ApplyFilters();
     }
 
-    // Hook this to the Favorited button's OnClick event. Click once = on, click again = off.
+    // Favorited button -> OnClick (click once = on, again = off)
     public void OnFavoritedClicked()
     {
         _favoritesOnly = !_favoritesOnly;
-        UpdateFavoritedButtonLook();
+        UpdateButtonLooks();
         ApplyFilters();
     }
 
-    private void UpdateFavoritedButtonLook()
+    // Newest button -> OnClick (click once = newest first, again = back to normal order)
+    public void OnNewestClicked()
     {
-        if (favoritedButtonImage != null)
-            favoritedButtonImage.color = _favoritesOnly ? favoritedOnColor : favoritedOffColor;
+        _newestFirst = !_newestFirst;
+        UpdateButtonLooks();
+        ApplyFilters();
     }
 
-    // One place that combines BOTH filters (rarity + favorites)
+    private void UpdateButtonLooks()
+    {
+        if (favoritedButtonImage != null)
+            favoritedButtonImage.color = _favoritesOnly ? buttonOnColor : buttonOffColor;
+        if (newestButtonImage != null)
+            newestButtonImage.color = _newestFirst ? buttonOnColor : buttonOffColor;
+    }
+
+    // ---------- Filtering + sorting ----------
+    // Position of a sticker in the book's ORIGINAL order (page by page)
+    private int NativeOrder(RaritySort sticker)
+    {
+        int pageIndex = 0;
+        if (sticker.originalParent != null)
+        {
+            for (int i = 0; i < stickerPages.Length; i++)
+            {
+                if (stickerPages[i] != null && stickerPages[i].transform == sticker.originalParent)
+                {
+                    pageIndex = i;
+                    break;
+                }
+            }
+        }
+        return pageIndex * 1000 + sticker.originalSiblingIndex;
+    }
+
+    // One place that combines rarity filter + favorites filter + newest sort
     private void ApplyFilters()
     {
-        if (rarityDropdown == null || page1Container == null)
+        if (rarityDropdown == null || stickerPages == null || stickerPages.Length == 0)
         {
-            Debug.LogError("Please make sure both Rarity Dropdown and Page 1 Container are assigned in the Inspector!");
+            Debug.LogError("Please make sure the Rarity Dropdown and Sticker Pages are assigned in the Inspector!");
             return;
         }
 
         string selectedOption = rarityDropdown.options[rarityDropdown.value].text.ToLower().Trim();
         bool rarityFilterOn = !(selectedOption == "all" || selectedOption == "all rarities");
-        bool anyFilterOn = rarityFilterOn || _favoritesOnly;
+        bool anyOn = rarityFilterOn || _favoritesOnly || _newestFirst;
 
         RaritySort[] allStickers = transform.parent.GetComponentsInChildren<RaritySort>(true);
 
-        foreach (RaritySort sticker in allStickers)
+        if (!anyOn)
         {
-            if (sticker == null) continue;
-
-            if (!anyFilterOn)
+            // Nothing selected: send every sticker back to its native page and spot
+            foreach (RaritySort sticker in allStickers)
             {
-                // No filters: send every sticker back to its native page
-                sticker.transform.SetParent(sticker.originalParent);
+                if (sticker == null) continue;
+                sticker.transform.SetParent(sticker.originalParent, false);
                 sticker.transform.SetSiblingIndex(sticker.originalSiblingIndex);
                 sticker.gameObject.SetActive(true);
-                continue;
+            }
+        }
+        else
+        {
+            // 1. Keep only the stickers that pass the filters; hide the rest
+            List<RaritySort> matches = new List<RaritySort>();
+            foreach (RaritySort sticker in allStickers)
+            {
+                if (sticker == null) continue;
+
+                bool matchesRarity = !rarityFilterOn ||
+                                     sticker.stickerRarity.ToString().ToLower() == selectedOption;
+                bool matchesFavorite = !_favoritesOnly || sticker.IsFavorited;
+
+                if (matchesRarity && matchesFavorite) matches.Add(sticker);
+                else sticker.gameObject.SetActive(false);
             }
 
-            bool matchesRarity = !rarityFilterOn ||
-                                 sticker.stickerRarity.ToString().ToLower() == selectedOption;
-            bool matchesFavorite = !_favoritesOnly || sticker.IsFavorited;
-
-            if (matchesRarity && matchesFavorite)
+            // 2. Order them: newest first if the Newest button is on, otherwise the book's normal order
+            IEnumerable<RaritySort> ordered;
+            if (_newestFirst)
             {
-                // Matching stickers move into Page 1's grid, so the binder look stays the same
-                sticker.transform.SetParent(page1Container);
-                sticker.gameObject.SetActive(true);
+                // To flip to oldest first, change OrderByDescending to OrderBy.
+                ordered = matches.OrderByDescending(s => s.AddedTicks).ThenBy(s => NativeOrder(s));
             }
             else
             {
-                sticker.gameObject.SetActive(false);
+                ordered = matches.OrderBy(s => NativeOrder(s));
             }
-        }
 
-        // Matches now all live on Page 1, so jump back to it
-        if (anyFilterOn)
-        {
+            // 3. Deal them out into the page grids, stickersPerPage at a time
+            int perPage = Mathf.Max(1, stickersPerPage);
+            int count = 0;
+            foreach (RaritySort sticker in ordered)
+            {
+                int pageIndex = count / perPage;
+
+                if (pageIndex < stickerPages.Length && stickerPages[pageIndex] != null)
+                {
+                    sticker.transform.SetParent(stickerPages[pageIndex].transform, false);
+                    sticker.transform.SetAsLastSibling(); // keeps the sorted order inside the grid
+                    sticker.gameObject.SetActive(true);
+                }
+                else
+                {
+                    sticker.gameObject.SetActive(false); // more stickers than pages can hold
+                }
+                count++;
+            }
+
+            // Results start on page 1
             _currentPageIndex = 0;
             UpdatePageVisuals();
         }

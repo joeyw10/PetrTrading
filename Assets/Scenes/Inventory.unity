@@ -4163,7 +4163,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1656403902}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1695127016}
+        m_TargetAssemblyTypeName: BinderSwipeController, Assembly-CSharp
+        m_MethodName: OnNewestClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1656403902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4299,11 +4311,12 @@ MonoBehaviour:
   stickerPages:
   - {fileID: 1727817205}
   - {fileID: 372338774}
+  stickersPerPage: 4
   rarityDropdown: {fileID: 1110436437}
-  page1Container: {fileID: 1727817206}
   favoritedButtonImage: {fileID: 0}
-  favoritedOnColor: {r: 1, g: 0.85, b: 0.4, a: 1}
-  favoritedOffColor: {r: 1, g: 1, b: 1, a: 1}
+  newestButtonImage: {fileID: 0}
+  buttonOnColor: {r: 1, g: 0.85, b: 0.4, a: 1}
+  buttonOffColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1715543384
 GameObject:
   m_ObjectHideFlags: 0
