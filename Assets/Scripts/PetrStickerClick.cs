@@ -1,13 +1,14 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
 {
     public GameObject catchButton;
     public GameObject ignoreButton;
     public GameObject stickerDetectedPanel;
-public TMPro.TMP_Text stickerDetectedText;
+    public TMP_Text stickerDetectedText;
 
     public enum StickerType
     {
@@ -17,31 +18,26 @@ public TMPro.TMP_Text stickerDetectedText;
     }
 
     public StickerType stickerType;
-
     public StickerInfo stickerInfo;
 
     private static PetrStickerClick selectedSticker;
 
-    private void Start()
-    {
-        catchButton.SetActive(false);
-        ignoreButton.SetActive(false);
-    }
+    // Do not hide shared buttons in Start().
+    // Another sticker spawning should not affect the open panel.
 
     public void OnPointerClick(PointerEventData eventData)
-{
-    selectedSticker = this;
+    {
+        selectedSticker = this;
 
-    stickerDetectedPanel.SetActive(true);
+        stickerDetectedPanel.SetActive(true);
 
-    stickerDetectedText.text =
-        stickerInfo.stickerName + " detected! What should we do?";
+        stickerDetectedText.text =
+            stickerInfo.stickerName +
+            " detected! What should we do?";
 
-    catchButton.SetActive(true);
-    ignoreButton.SetActive(true);
-}
-
-    
+        catchButton.SetActive(true);
+        ignoreButton.SetActive(true);
+    }
 
     public void IgnoreSticker()
     {
@@ -50,12 +46,15 @@ public TMPro.TMP_Text stickerDetectedText;
             return;
         }
 
-        selectedSticker.catchButton.SetActive(false);
-        selectedSticker.ignoreButton.SetActive(false);
-        selectedSticker.stickerDetectedPanel.SetActive(false);
+        PetrStickerClick sticker = selectedSticker;
 
-        Destroy(selectedSticker.gameObject);
+        sticker.catchButton.SetActive(false);
+        sticker.ignoreButton.SetActive(false);
+        sticker.stickerDetectedPanel.SetActive(false);
+
         selectedSticker = null;
+
+        Destroy(sticker.gameObject);
     }
 
     public static PetrStickerClick GetSelectedSticker()
@@ -67,13 +66,16 @@ public TMPro.TMP_Text stickerDetectedText;
     {
         catchButton.SetActive(false);
         ignoreButton.SetActive(false);
+        stickerDetectedPanel.SetActive(false);
+
+        selectedSticker = null;
 
         Destroy(gameObject);
-        selectedSticker = null;
     }
+
     public void HideActionButtons()
-{
-    catchButton.SetActive(false);
-    ignoreButton.SetActive(false);
-}
+    {
+        catchButton.SetActive(false);
+        ignoreButton.SetActive(false);
+    }
 }

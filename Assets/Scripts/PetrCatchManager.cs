@@ -37,10 +37,18 @@ public class PetrCatchManager : MonoBehaviour
             stickerDetectedPanel.SetActive(false);
         }
 
-        // Make sure the inventory exists
         if (inventory == null)
         {
             Debug.LogWarning("Inventory is not assigned!");
+            return;
+        }
+
+        PetrStickerClick sticker =
+            PetrStickerClick.GetSelectedSticker();
+
+        if (sticker == null)
+        {
+            Debug.LogWarning("No sticker is selected!");
             return;
         }
 
@@ -55,32 +63,23 @@ public class PetrCatchManager : MonoBehaviour
             return;
         }
 
-        // Get the currently selected sticker
-        PetrStickerClick sticker =
-            PetrStickerClick.GetSelectedSticker();
-
-        if (sticker == null)
-        {
-            Debug.LogWarning("No sticker is selected!");
-            return;
-        }
+        // Consume one ant for every catch attempt,
+        // regardless of whether the catch succeeds.
+        UseOneAnt(antType);
 
         bool success = false;
 
-        // Common stickers can be caught with any ant
         if (sticker.stickerType ==
             PetrStickerClick.StickerType.Common)
         {
             success = true;
         }
-        // Rare stickers require Golden or Diamond Ants
         else if (sticker.stickerType ==
                  PetrStickerClick.StickerType.Rare)
         {
             success = antType == "Golden Ant" ||
                       antType == "Diamond Ant";
         }
-        // Legendary stickers require Diamond Ants
         else if (sticker.stickerType ==
                  PetrStickerClick.StickerType.Legendary)
         {
@@ -91,7 +90,6 @@ public class PetrCatchManager : MonoBehaviour
         {
             catchResultText.text = "Catch successful!";
 
-            // Add the caught sticker to inventory
             if (sticker.stickerInfo != null)
             {
                 inventory.addSticker(sticker.stickerInfo);
@@ -101,35 +99,16 @@ public class PetrCatchManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning(
-                    "StickerInfo is missing!");
+                Debug.LogWarning("StickerInfo is missing!");
             }
 
-            // Subtract one ant of the type used
-            if (antType == "Common Ant")
-            {
-                inventory.setCommonAnts(-1);
-            }
-            else if (antType == "Golden Ant")
-            {
-                inventory.setGoldenAnts(-1);
-            }
-            else if (antType == "Diamond Ant")
-            {
-                inventory.setDiamondAnts(-1);
-            }
-
-            Debug.Log("Used one " + antType);
-
-            // Complete the catch
             sticker.CatchSuccessfully();
         }
         else
         {
             catchResultText.text =
-                "Catch failed! Try a different ant.";
+                "Catch failed! Try using a different ant!";
 
-            // Failed catches do not consume ants
             sticker.HideActionButtons();
         }
 
@@ -152,5 +131,23 @@ public class PetrCatchManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void UseOneAnt(string antType)
+    {
+        if (antType == "Common Ant")
+        {
+            inventory.setCommonAnts(-1);
+        }
+        else if (antType == "Golden Ant")
+        {
+            inventory.setGoldenAnts(-1);
+        }
+        else if (antType == "Diamond Ant")
+        {
+            inventory.setDiamondAnts(-1);
+        }
+
+        Debug.Log("Used one " + antType);
     }
 }
