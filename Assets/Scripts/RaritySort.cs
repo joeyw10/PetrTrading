@@ -6,13 +6,16 @@ public class RaritySort : MonoBehaviour, IPointerClickHandler
 {
     // Define an enum to easily select the rarity from an inspector dropdown
     public enum Rarity { All, Common, Rare, Epic, Legendary }
-    
+
     [Header("Sticker Settings")]
     public Rarity stickerRarity;
 
     // These store where the sticker originally belongs in your book layout
     [HideInInspector] public Transform originalParent;
     [HideInInspector] public int originalSiblingIndex;
+
+    [Header("Sticker Asset")]
+    public StickerInfo stickerData;
 
     private void Awake()
     {
@@ -21,8 +24,18 @@ public class RaritySort : MonoBehaviour, IPointerClickHandler
         originalSiblingIndex = transform.GetSiblingIndex();
     }
 
-    [Header("Sticker Asset")]
-    public StickerInfo stickerData;
+    // ---------- Favorites (stored by StickerFavorites, shared with the Sticker Info screen) ----------
+    public bool IsFavorited
+    {
+        get { return StickerFavorites.IsFavorited(stickerData); }
+    }
+
+    // Right-click the component header in the Inspector during Play mode to test it.
+    [ContextMenu("Toggle Favorite")]
+    public void ToggleFavorite()
+    {
+        StickerFavorites.Toggle(stickerData);
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {

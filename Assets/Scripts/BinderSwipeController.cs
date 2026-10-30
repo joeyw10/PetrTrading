@@ -11,35 +11,44 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     [Header("Binder Backgrounds")]
     [Tooltip("Element 0 = Binder_1stPG_0, Element 1 = Binder_2nd...")]
     public Sprite[] binderBackgroundSprites;
-    
+
     [Header("Sticker Pages")]
     [Tooltip("Drag your Page1 and Page2 GameObjects here in order.")]
     public GameObject[] stickerPages;
 
     [Header("Filter Settings")]
     [Tooltip("Drag your Rarity Dropdown GameObject here.")]
-    [SerializeField] private TMP_Dropdown rarityDropdown; 
-    
+    [SerializeField] private TMP_Dropdown rarityDropdown;
+
     [Tooltip("Drag the 'Page 1' GameObject from your Hierarchy here.")]
     [SerializeField] private Transform page1Container;
-    
+
+    [Header("Favorited Button (optional look)")]
+    [Tooltip("Drag the Favorited button's Image here to tint it while the filter is on.")]
+    [SerializeField] private Image favoritedButtonImage;
+    [SerializeField] private Color favoritedOnColor = new Color(1f, 0.85f, 0.4f);
+    [SerializeField] private Color favoritedOffColor = Color.white;
+
     private Image _binderImage;
     private int _currentPageIndex = 0;
     private Vector2 _pointerStartPosition;
+    private bool _favoritesOnly = false;
 
     private void Start()
     {
         _binderImage = GetComponent<Image>();
         UpdatePageVisuals();
+        UpdateFavoritedButtonLook();
     }
 
+    // ---------- Swiping ----------
     public void OnBeginDrag(PointerEventData eventData)
     {
         _pointerStartPosition = eventData.position;
     }
 
-    public void OnDrag(PointerEventData eventData) 
-    { 
+    public void OnDrag(PointerEventData eventData)
+    {
         // Intentionally left blank, but required so Unity catches drag data
     }
 
@@ -47,17 +56,10 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     {
         Vector2 dragDelta = eventData.position - _pointerStartPosition;
 
-        // Check if the swipe met our minimum distance requirement
         if (Mathf.Abs(dragDelta.x) >= swipeThreshold)
         {
-            if (dragDelta.x > 0) 
-            {
-                OnSwipeRight(); // Go to previous page
-            }
-            else 
-            {
-                OnSwipeLeft(); // Go to next page
-            }
+            if (dragDelta.x > 0) OnSwipeRight(); // previous page
+            else OnSwipeLeft();                  // next page
         }
     }
 
@@ -88,21 +90,40 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
             _binderImage.sprite = binderBackgroundSprites[_currentPageIndex];
         }
 
-        // 2. Loop through our page containers and turn on ONLY the active one
+        // 2. Turn on ONLY the active page
         if (stickerPages != null)
         {
             for (int i = 0; i < stickerPages.Length; i++)
             {
                 if (stickerPages[i] != null)
-                {
-                    // Turn true for active page index, false for all others
                     stickerPages[i].SetActive(i == _currentPageIndex);
-                }
             }
         }
     }
 
-        public void OnDropdownValueChanged()
+    // ---------- Filtering ----------
+    // Hook this to the Rarity Dropdown's "On Value Changed" event (same as before).
+    public void OnDropdownValueChanged()
+    {
+        ApplyFilters();
+    }
+
+    // Hook this to the Favorited button's OnClick event. Click once = on, click again = off.
+    public void OnFavoritedClicked()
+    {
+        _favoritesOnly = !_favoritesOnly;
+        UpdateFavoritedButtonLook();
+        ApplyFilters();
+    }
+
+    private void UpdateFavoritedButtonLook()
+    {
+        if (favoritedButtonImage != null)
+            favoritedButtonImage.color = _favoritesOnly ? favoritedOnColor : favoritedOffColor;
+    }
+
+    // One place that combines BOTH filters (rarity + favorites)
+    private void ApplyFilters()
     {
         if (rarityDropdown == null || page1Container == null)
         {
@@ -111,25 +132,31 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         }
 
         string selectedOption = rarityDropdown.options[rarityDropdown.value].text.ToLower().Trim();
+        bool rarityFilterOn = !(selectedOption == "all" || selectedOption == "all rarities");
+        bool anyFilterOn = rarityFilterOn || _favoritesOnly;
 
         RaritySort[] allStickers = transform.parent.GetComponentsInChildren<RaritySort>(true);
 
         foreach (RaritySort sticker in allStickers)
         {
             if (sticker == null) continue;
-            
-            string stickerRarityStr = sticker.stickerRarity.ToString().ToLower();
 
-            // Resetting back to native pages
-            if (selectedOption == "all" || selectedOption == "all rarities")
+            if (!anyFilterOn)
             {
+                // No filters: send every sticker back to its native page
                 sticker.transform.SetParent(sticker.originalParent);
                 sticker.transform.SetSiblingIndex(sticker.originalSiblingIndex);
-                sticker.gameObject.SetActive(true); 
+                sticker.gameObject.SetActive(true);
+                continue;
             }
-            // Moving onto Page 1 panel layout
-            else if (stickerRarityStr == selectedOption)
+
+            bool matchesRarity = !rarityFilterOn ||
+                                 sticker.stickerRarity.ToString().ToLower() == selectedOption;
+            bool matchesFavorite = !_favoritesOnly || sticker.IsFavorited;
+
+            if (matchesRarity && matchesFavorite)
             {
+                // Matching stickers move into Page 1's grid, so the binder look stays the same
                 sticker.transform.SetParent(page1Container);
                 sticker.gameObject.SetActive(true);
             }
@@ -138,18 +165,20 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
                 sticker.gameObject.SetActive(false);
             }
         }
-        
-        // We force all underlying Layout Groups on your pages to rebuild their element positions immediately
+
+        // Matches now all live on Page 1, so jump back to it
+        if (anyFilterOn)
+        {
+            _currentPageIndex = 0;
+            UpdatePageVisuals();
+        }
+
+        // Rebuild the grid layouts immediately
         foreach (GameObject page in stickerPages)
         {
             if (page != null)
-            {
-                // Finds layout system elements (like GridLayoutGroup) and forces a position update
                 LayoutRebuilder.ForceRebuildLayoutImmediate(page.GetComponent<RectTransform>());
-            }
         }
-        
-        // Double-ensure layout calculations finish processing this frame
         Canvas.ForceUpdateCanvases();
     }
 }
