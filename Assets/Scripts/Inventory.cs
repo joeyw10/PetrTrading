@@ -60,6 +60,10 @@ public class Inventory : ScriptableObject
     // when using this, positive number adds while negative subtracts
     public void setStickerPacks(int packsModifier) {
         stickerPacks = stickerPacks + packsModifier;
+
+        if(stickerPacks < 0) {
+            stickerPacks = 0;
+        }
     }
 
 }

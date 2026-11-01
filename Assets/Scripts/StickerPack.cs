@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class StickerPack : MonoBehaviour
 {
+    [SerializeField] private HomeController home;
     [SerializeField] private Inventory inventory;
     [SerializeField] private Animator packAnimator;
     [SerializeField] private StickerRandomizer randomizeStickers;
@@ -40,6 +41,8 @@ public class StickerPack : MonoBehaviour
 
     public void ChooseStickers()
     {
+        inventory.setStickerPacks(-1);
+
         sticker1 = randomizeStickers.GetRandomSticker();
         inventory.addSticker(sticker1);
 

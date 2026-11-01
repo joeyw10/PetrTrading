@@ -3,6 +3,7 @@ using TMPro;
 
 public class Store : MonoBehaviour
 {
+    [SerializeField] private HomeController home;
     [SerializeField] GameObject StickerPackObjects;
     [SerializeField] GameObject StoreModal;
     [SerializeField] GameObject PacksTab;
@@ -50,18 +51,26 @@ public class Store : MonoBehaviour
     // buying packs
     public void Purchase1Pack() {
         inventory.setStickerPacks(1);
+        home.AddStickerPack();
+        home.SetFalse();
     }
 
     public void Purchase3Pack() {
         inventory.setStickerPacks(3);
+        home.AddStickerPack();
+        home.SetFalse();
     }
 
     public void Purchase5Pack() {
         inventory.setStickerPacks(5);
+        home.AddStickerPack();
+        home.SetFalse();
     }
 
     public void Purchase10Pack() {
         inventory.setStickerPacks(10);
+        home.AddStickerPack();
+        home.SetFalse();
     }
 
     // buying ants

@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85c9db2b17b844b9aef99beae400812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  home: {fileID: 5436645313510288601, guid: 799596ab9662c4316aebac21dc6cd117, type: 3}
+  inventory: {fileID: 11400000, guid: a7b69af4b5fb945c1ac29b16ffdfc722, type: 2}
 --- !u!61 &3489508827586124001
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,6 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b394783ae0dde4deb923e06fefbdeec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StickerPack
+  home: {fileID: 5436645313510288601, guid: 799596ab9662c4316aebac21dc6cd117, type: 3}
   inventory: {fileID: 11400000, guid: a7b69af4b5fb945c1ac29b16ffdfc722, type: 2}
   packAnimator: {fileID: 8943130392850211664}
   randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
