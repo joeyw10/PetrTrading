@@ -50,26 +50,34 @@ public class Store : MonoBehaviour
 
     // buying packs
     public void Purchase1Pack() {
+        if(inventory.getStickerPacks() == 0) {
+            home.AddStickerPack();
+        }
         inventory.setStickerPacks(1);
-        home.AddStickerPack();
         home.SetFalse();
     }
 
     public void Purchase3Pack() {
+        if(inventory.getStickerPacks() == 0) {
+            home.AddStickerPack();
+        }
         inventory.setStickerPacks(3);
-        home.AddStickerPack();
         home.SetFalse();
     }
 
     public void Purchase5Pack() {
+        if(inventory.getStickerPacks() == 0) {
+            home.AddStickerPack();
+        }
         inventory.setStickerPacks(5);
-        home.AddStickerPack();
         home.SetFalse();
     }
 
     public void Purchase10Pack() {
+        if(inventory.getStickerPacks() == 0) {
+            home.AddStickerPack();
+        }
         inventory.setStickerPacks(10);
-        home.AddStickerPack();
         home.SetFalse();
     }
 

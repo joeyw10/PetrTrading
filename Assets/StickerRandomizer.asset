@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StickerRandomizer
   possibleStickers:
   - {fileID: 11400000, guid: f91401c177f290e41902cd15b596e330, type: 2}
-  - {fileID: 11400000, guid: bf4f4dbec48f2604fa5e8da5f03101c0, type: 2}
   - {fileID: 11400000, guid: 3a0ab9b050b7c46049e4ceb53a640261, type: 2}
   - {fileID: 11400000, guid: efc8731c5a0333249af1522ea865b237, type: 2}
   - {fileID: 11400000, guid: dbb2cfcd48315468a8d2fddc37785d2c, type: 2}
