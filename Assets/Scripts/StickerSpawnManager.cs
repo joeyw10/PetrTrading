@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -32,6 +31,8 @@ public class StickerSpawnManager : MonoBehaviour
     public StickerInfo beachStickerInfo;
     public StickerInfo nasaStickerInfo;
     public StickerInfo easterBunnyStickerInfo;
+
+    private ButtonSound _buttonSound;
 
     private void Start()
     {
@@ -107,9 +108,13 @@ public class StickerSpawnManager : MonoBehaviour
         stickerImage.preserveAspect = true;
         stickerImage.raycastTarget = false;
 
+        // Look the sound manager up once and reuse it (FindObjectOfType is deprecated)
+        if (_buttonSound == null)
+            _buttonSound = FindFirstObjectByType<ButtonSound>();
+
         PetrStickerClick clickScript =
             stickerObject.AddComponent<PetrStickerClick>();
-        clickScript.buttonSound = FindObjectOfType<ButtonSound>();
+        clickScript.buttonSound = _buttonSound;
 
         clickScript.stickerDetectedPanel =
             stickerDetectedPanel;
@@ -153,12 +158,11 @@ public class StickerSpawnManager : MonoBehaviour
         float disappearTime = Random.Range(60f, 120f);
 
         Destroy(stickerObject, disappearTime);
-        ButtonSound soundManager = FindObjectOfType<ButtonSound>();
 
-if (soundManager != null)
-{
-    soundManager.PlaySpawnSound();
-}
+        if (_buttonSound != null)
+        {
+            _buttonSound.PlaySpawnSound();
+        }
 
         Debug.Log(
             "Petr sticker spawned. It will disappear in " +
