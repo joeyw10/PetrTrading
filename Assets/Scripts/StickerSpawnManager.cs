@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -9,32 +8,37 @@ public class StickerSpawnManager : MonoBehaviour
     public Sprite beachSticker;
     public Sprite nasaSticker;
     public Sprite easterBunnySticker;
+
+    [Header("Buttons and Popup")]
     public GameObject catchButton;
+    public GameObject ignoreButton;
+    public GameObject stickerDetectedPanel;
+    public TMPro.TMP_Text stickerDetectedText;
+    public UnityEngine.UI.Image detectedStickerImage;
 
-    public StickerInfo beachStickerInfo;
-public StickerInfo nasaStickerInfo;
-public StickerInfo easterBunnyStickerInfo;
-public GameObject ignoreButton;
-
-public GameObject stickerDetectedPanel;
-public TMPro.TMP_Text stickerDetectedText;
+    [Header("Player Marker")]
+    public Transform playerMarker;
 
     [Header("Map Settings")]
     public RectTransform mapTransform;
 
     [Header("Spawn Settings")]
-    public float stickerSize = 500f;
+    public float stickerSize = 180f;
     public float minimumSpawnInterval = 10f;
     public float maximumSpawnInterval = 30f;
+
+    [Header("Sticker Information")]
+    public StickerInfo beachStickerInfo;
+    public StickerInfo nasaStickerInfo;
+    public StickerInfo easterBunnyStickerInfo;
+
+    private ButtonSound _buttonSound;
 
     private void Start()
     {
         Debug.Log("Sticker Spawn Manager is ready!");
 
-        // Spawn one sticker immediately.
         SpawnSticker();
-
-        // Keep spawning stickers at random intervals.
         StartCoroutine(SpawnStickerRoutine());
     }
 
@@ -46,8 +50,6 @@ public TMPro.TMP_Text stickerDetectedText;
                 minimumSpawnInterval,
                 maximumSpawnInterval
             );
-
-            Debug.Log("Next sticker in " + waitTime + " seconds.");
 
             yield return new WaitForSeconds(waitTime);
 
@@ -63,22 +65,29 @@ public TMPro.TMP_Text stickerDetectedText;
             return;
         }
 
-        // Randomly choose one of the three stickers.
         int randomNumber = Random.Range(0, 3);
 
         Sprite chosenSticker;
+        StickerInfo chosenInfo;
+        PetrStickerClick.StickerType chosenType;
 
         if (randomNumber == 0)
         {
             chosenSticker = beachSticker;
+            chosenInfo = beachStickerInfo;
+            chosenType = PetrStickerClick.StickerType.Common;
         }
         else if (randomNumber == 1)
         {
             chosenSticker = nasaSticker;
+            chosenInfo = nasaStickerInfo;
+            chosenType = PetrStickerClick.StickerType.Rare;
         }
         else
         {
             chosenSticker = easterBunnySticker;
+            chosenInfo = easterBunnyStickerInfo;
+            chosenType = PetrStickerClick.StickerType.Legendary;
         }
 
         if (chosenSticker == null)
@@ -87,50 +96,39 @@ public TMPro.TMP_Text stickerDetectedText;
             return;
         }
 
-        // Create the sticker on the map.
         GameObject stickerObject =
             new GameObject("SpawnedPetrSticker");
 
         stickerObject.transform.SetParent(mapTransform, false);
 
-        Image stickerImage = stickerObject.AddComponent<Image>();
+        Image stickerImage =
+            stickerObject.AddComponent<Image>();
+
         stickerImage.sprite = chosenSticker;
         stickerImage.preserveAspect = true;
-        stickerImage.raycastTarget = true;
+        stickerImage.raycastTarget = false;
+
+        // Look the sound manager up once and reuse it (FindObjectOfType is deprecated)
+        if (_buttonSound == null)
+            _buttonSound = FindFirstObjectByType<ButtonSound>();
 
         PetrStickerClick clickScript =
-    stickerObject.AddComponent<PetrStickerClick>();
+            stickerObject.AddComponent<PetrStickerClick>();
+        clickScript.buttonSound = _buttonSound;
 
-    clickScript.stickerDetectedPanel =
-    stickerDetectedPanel;
+        clickScript.stickerDetectedPanel =
+            stickerDetectedPanel;
 
-clickScript.stickerDetectedText =
-    stickerDetectedText;
+        clickScript.stickerDetectedText =
+            stickerDetectedText;
+        clickScript.detectedStickerImage =
+    detectedStickerImage;
 
-clickScript.catchButton = catchButton;
-clickScript.ignoreButton = ignoreButton;
-
-if (chosenSticker == beachSticker)
-{
-    clickScript.stickerType =
-        PetrStickerClick.StickerType.Common;
-
-    clickScript.stickerInfo = beachStickerInfo;
-}
-else if (chosenSticker == nasaSticker)
-{
-    clickScript.stickerType =
-        PetrStickerClick.StickerType.Rare;
-
-    clickScript.stickerInfo = nasaStickerInfo;
-}
-else
-{
-    clickScript.stickerType =
-        PetrStickerClick.StickerType.Legendary;
-
-    clickScript.stickerInfo = easterBunnyStickerInfo;
-}
+        clickScript.catchButton = catchButton;
+        clickScript.ignoreButton = ignoreButton;
+        clickScript.playerMarker = playerMarker;
+        clickScript.stickerType = chosenType;
+        clickScript.stickerInfo = chosenInfo;
 
         RectTransform stickerRect =
             stickerObject.GetComponent<RectTransform>();
@@ -138,7 +136,6 @@ else
         stickerRect.sizeDelta =
             new Vector2(stickerSize, stickerSize);
 
-        // Choose a random position within the visible viewport.
         RectTransform viewport =
             mapTransform.parent.GetComponent<RectTransform>();
 
@@ -158,15 +155,17 @@ else
             stickerRect.anchoredPosition = Vector2.zero;
         }
 
-        Debug.Log("A Petr sticker appeared!");
-
-        // Each sticker disappears independently after 1–2 minutes.
         float disappearTime = Random.Range(60f, 120f);
 
         Destroy(stickerObject, disappearTime);
 
+        if (_buttonSound != null)
+        {
+            _buttonSound.PlaySpawnSound();
+        }
+
         Debug.Log(
-            "Sticker will disappear in " +
+            "Petr sticker spawned. It will disappear in " +
             Mathf.RoundToInt(disappearTime) + " seconds."
         );
     }

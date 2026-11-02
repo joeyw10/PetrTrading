@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -6,24 +5,32 @@ using UnityEngine.UI;
 
 /// <summary>
 /// The "Sticker packs" tab: shows today's free packs.
-/// Tapping an unopened pack marks it opened and loads the pack-opening scene.
-/// When you come back, opened packs show their "opened" sprite (the grey-overlay version).
-/// Which packs were opened is saved, and everything resets when the date changes.
+/// The Inventory hands out the free packs each day. This panel just shows them:
+/// packs that have been opened today show their "opened" sprite, the rest look normal.
+/// Tapping an unopened pack takes the player to the pack opening scene.
 /// </summary>
 public class DailyPacksPanel : MonoBehaviour
 {
     [System.Serializable]
     public class PackSlot
     {
-        public Button button;        // the pack's button (tap to open)
+        public Button button;        // the pack's button (tap to go open it)
         public Image image;          // the pack's picture (usually the button's own Image)
         public Sprite openedSprite;  // same art with a grey overlay, shown once opened
 
         [HideInInspector] public Sprite normalSprite; // remembered automatically at start
     }
 
-    [Header("The free packs")]
+    [Header("The free packs (make this match Inventory's Daily Free Packs)")]
     [SerializeField] private PackSlot[] slots;
+
+    [Header("Inventory")]
+    [Tooltip("Tells this panel how many packs were opened today.")]
+    [SerializeField] private Inventory inventory;
+
+    [Header("Shop button (the 'Unlock more packs!' tile)")]
+    [Tooltip("Optional. Goes to the same scene but is NOT a daily pack, so it never greys out.")]
+    [SerializeField] private Button shopButton;
 
     [Header("Scene to load when a pack is tapped")]
     [Tooltip("Exact name of your home / pack opening scene. It must be in the build's scene list.")]
@@ -37,29 +44,17 @@ public class DailyPacksPanel : MonoBehaviour
     [SerializeField] private Color openedTint = new Color(0.45f, 0.45f, 0.45f, 1f);
 
     [Header("When a pack is tapped")]
-    [Tooltip("Runs with the pack's number (0-3) just before the scene loads. Optional.")]
+    [Tooltip("Runs with the pack's number (0-2) just before the scene loads. Optional.")]
     public UnityEvent<int> onPackOpened;
 
     // Other scenes can read which pack was tapped (0 = first pack). -1 = none.
     public static int LastTappedPack = -1;
 
-    private const string DateKey = "dailypacks_date";
-
-    private static string OpenedKey(int index)
-    {
-        return "dailypacks_opened_" + index;
-    }
-
-    private static string Today()
-    {
-        return DateTime.Now.ToString("yyyy-MM-dd");
-    }
-
     private void Awake()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            // Remember the normal picture so we can switch back after a daily reset
+            // Remember the normal picture so we can switch back on a new day
             if (slots[i].image != null)
                 slots[i].normalSprite = slots[i].image.sprite;
 
@@ -67,50 +62,48 @@ public class DailyPacksPanel : MonoBehaviour
             if (slots[i].button != null)
                 slots[i].button.onClick.AddListener(() => OpenPack(index));
         }
+
+        if (shopButton != null)
+            shopButton.onClick.AddListener(OpenShop);
     }
 
     // Runs every time the tab is shown, so it always reflects today's state
     private void OnEnable()
     {
-        ResetIfNewDay();
         Refresh();
     }
 
-    private void ResetIfNewDay()
-    {
-        if (PlayerPrefs.GetString(DateKey, "") == Today()) return;
-
-        for (int i = 0; i < slots.Length; i++)
-            PlayerPrefs.SetInt(OpenedKey(i), 0);
-
-        PlayerPrefs.SetString(DateKey, Today());
-        PlayerPrefs.Save();
-    }
-
+    // The first N packs count as opened, where N = packs opened today
     public bool IsOpened(int index)
     {
-        return PlayerPrefs.GetInt(OpenedKey(index), 0) == 1;
+        if (inventory == null) return false;
+        return index < inventory.getPacksOpenedToday();
+    }
+
+    // The shop tile just travels to the scene; it is never greyed out
+    public void OpenShop()
+    {
+        LastTappedPack = -1;
+        GoToPackScene();
     }
 
     public void OpenPack(int index)
     {
-        ResetIfNewDay(); // in case midnight passed while the screen was open
         if (index < 0 || index >= slots.Length || IsOpened(index)) return; // already opened: do nothing
-
-        // Save it as opened right away, so it's already switched when the player returns
-        PlayerPrefs.SetInt(OpenedKey(index), 1);
-        PlayerPrefs.Save();
 
         LastTappedPack = index;
         onPackOpened.Invoke(index);
 
+        GoToPackScene();
+    }
+
+    private void GoToPackScene()
+    {
         // Make the Inventory scene reopen on this tab when we come back
         InventoryTabs.NextStartTab = packsTabIndex;
 
         if (!string.IsNullOrEmpty(packOpeningSceneName))
             SceneManager.LoadScene(packOpeningSceneName);
-        else
-            Refresh(); // no scene set: just update the look
     }
 
     private void Refresh()
@@ -140,13 +133,12 @@ public class DailyPacksPanel : MonoBehaviour
         }
     }
 
-    // For testing: right-click the component header in the Inspector during Play mode.
+    // For testing: right-click the component header in the Inspector.
+    // Gives a fresh day's packs right away (3 packs, none opened).
     [ContextMenu("Reset Today's Packs")]
     private void ResetForTesting()
     {
-        for (int i = 0; i < slots.Length; i++)
-            PlayerPrefs.SetInt(OpenedKey(i), 0);
-        PlayerPrefs.Save();
+        if (inventory != null) inventory.ResetDailyPacksForTesting();
         Refresh();
     }
 }

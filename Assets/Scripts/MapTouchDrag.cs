@@ -7,7 +7,7 @@ public class MapTouchDrag : MonoBehaviour, IBeginDragHandler, IDragHandler
     public PlayerGPS playerGPS;
     public RectTransform mapViewport;
 
-    public float coordinateScale = 0.00001f;
+    public float coordinateScale = 0.0000001f;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
