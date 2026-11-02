@@ -5,6 +5,7 @@ public class Trading : MonoBehaviour
 {
     public Inventory inventory;
     public GameObject firstPopup;
+    public GameObject profile;
     public GameObject requestOne;
     public GameObject requestTwo;
     //public GameObjectbotOffer;
@@ -45,6 +46,7 @@ public class Trading : MonoBehaviour
 
     
         requestOne.SetActive(true);
+        profile.SetActive(true);
         option.SetActive(true);
         
 
@@ -64,6 +66,7 @@ public class Trading : MonoBehaviour
             Invoke("stickerOneFalse", 2f);
             
             
+            
         //}
 
     }
@@ -71,8 +74,10 @@ public class Trading : MonoBehaviour
     public void stickerOneFalse()
     {
         stickerOne.SetActive(false);
+        profile.SetActive(false);
         Destroy(stickerOfferOne);
         Destroy(playerOfferOne);
+        
     }
 
 
@@ -94,6 +99,7 @@ public class Trading : MonoBehaviour
         requestTwo.SetActive(false);
         option2.SetActive(false);
         Destroy(stickerOfferOne);
+        profile.SetActive(false);
         Cancel();
         
 
