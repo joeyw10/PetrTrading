@@ -54,6 +54,8 @@ public class PetrCatchManager : MonoBehaviour
         }
 
         // Check whether the player has the selected ant
+        
+        // Check whether the player has the selected ant
         if (!HasAnts(antType))
         {
             catchResultText.text =
@@ -61,8 +63,13 @@ public class PetrCatchManager : MonoBehaviour
 
             catchResultPanel.SetActive(true);
             Debug.LogWarning("Not enough ants: " + antType);
+
+            // Remove the sticker because the catch attempt cannot proceed.
+            sticker.CatchSuccessfully();
+
             return;
         }
+
 
         // Consume one ant for every catch attempt,
         // regardless of whether the catch succeeds.
