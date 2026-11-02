@@ -15,10 +15,12 @@ public class HomeController : MonoBehaviour
         if(inventory.getStickerPacks() == 0) {
             getpacks.SetActive(true);
             storebutton.SetActive(true);
+            Debug.Log("Start - There are no sticker packs.");
         } else if(inventory.getStickerPacks() > 0) {
             getpacks.SetActive(false);
             storebutton.SetActive(false);
             Instantiate(stickerPackPrefab, transform.position, transform.rotation, transform);
+            Debug.Log("Start - There are sticker packs, so added one.");
             
             // for(int i = 0; i < inventory.getStickerPacks(); i++) {
             //     currentPack = Instantiate(stickerPackPrefab, transform.position, transform.rotation, transform);
@@ -43,6 +45,7 @@ public class HomeController : MonoBehaviour
     //         sr = currentPack.GetComponent<SpriteRenderer>();
     //         sr.sortingOrder = i + 1;
     //     }
+        Debug.Log("Added a Sticker Pack.");
     }
 
     public void SetFalse() {
