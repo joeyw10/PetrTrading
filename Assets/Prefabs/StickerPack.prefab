@@ -263,7 +263,7 @@ MonoBehaviour:
   home: {fileID: 5436645313510288601, guid: 799596ab9662c4316aebac21dc6cd117, type: 3}
   inventory: {fileID: 11400000, guid: a7b69af4b5fb945c1ac29b16ffdfc722, type: 2}
   packAnimator: {fileID: 8943130392850211664}
-  randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
+  randomizeStickers: {fileID: 11400000, guid: 0f368800637dc41d5ac7ca6ae192fdc4, type: 2}
   stash: {fileID: 2064653023864761914}
 --- !u!61 &218242027328592456
 BoxCollider2D:

@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   myStickers: []
+  database: {fileID: 11400000, guid: 3c730a3e116ec46c28ce0043179c3110, type: 2}
+  commonWeight: 70
+  rareWeight: 25
+  legendaryWeight: 5
+  dailyFreePacks: 3

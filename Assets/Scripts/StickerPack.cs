@@ -19,7 +19,7 @@ public class StickerPack : MonoBehaviour
     GameObject stickerPrefab3;
     GameObject stickerPrefab4;
 
-    
+
 
     void Start() {
         stash.SetActive(false);
@@ -33,16 +33,36 @@ public class StickerPack : MonoBehaviour
     private void OnMouseDown()
     {
         if(packOpened == false) {
+        if (!CanOpen()) return; // missing setup: log an error and keep the pack unopened
         ChooseStickers();
         Debug.Log("Mouse down detected");
         packOpened = true;
         }
     }
 
+    // A pack made from a prefab can't hold a link to a scene object, so look the randomizer up if it's empty
+    private bool CanOpen()
+    {
+        if (randomizeStickers == null)
+            randomizeStickers = FindFirstObjectByType<StickerRandomizer>();
+
+        if (randomizeStickers == null)
+        {
+            Debug.LogError("StickerPack: no StickerRandomizer is assigned or found in the scene, so the pack can't be opened.");
+            return false;
+        }
+
+        if (inventory == null)
+        {
+            Debug.LogError("StickerPack: the Inventory slot is empty.");
+            return false;
+        }
+
+        return true;
+    }
+
     public void ChooseStickers()
     {
-        inventory.setStickerPacks(-1);
-
         sticker1 = randomizeStickers.GetRandomSticker();
         inventory.addSticker(sticker1);
 
@@ -54,6 +74,9 @@ public class StickerPack : MonoBehaviour
 
         sticker4 = randomizeStickers.GetRandomSticker();
         inventory.addSticker(sticker4);
+
+        // Use up the pack only once the stickers were actually added
+        inventory.setStickerPacks(-1);
 
         DisplayStickers();
     }

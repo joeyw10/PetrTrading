@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class RaritySort : MonoBehaviour, IPointerClickHandler
+public class Sort : MonoBehaviour, IPointerClickHandler
 {
     // Define an enum to easily select the rarity from an inspector dropdown
     public enum Rarity { All, Common, Rare, Epic, Legendary }

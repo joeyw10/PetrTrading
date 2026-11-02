@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 1bf8b358ce3464c0da78ba7436655598
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inventory: {fileID: 11400000, guid: a7b69af4b5fb945c1ac29b16ffdfc722, type: 2}
+  - stickerSlotPrefab: {fileID: 5858071218675898901, guid: ad2af41c561a541e7b05e3e813fb4a2d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,8 @@ public class BinderPopulator : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
 
-    [Tooltip("A sticker slot saved as a prefab. It must have the Rarity Sort component.")]
-    [SerializeField] private RaritySort stickerSlotPrefab;
+    [Tooltip("A sticker slot saved as a prefab ASSET (from Assets/Prefabs). It must have the Rarity Sort component.")]
+    [SerializeField] private Sort stickerSlotPrefab;
 
     [Tooltip("Same Page 1 / Page 2 list used by the Binder Swipe Controller.")]
     [SerializeField] private GameObject[] stickerPages;
@@ -32,14 +33,27 @@ public class BinderPopulator : MonoBehaviour
             return;
         }
 
-        // 1. Remove the hand-placed stickers
+        if (inventory.myStickers == null)
+            inventory.myStickers = new List<StickerInfo>();
+
+        Debug.Log("BinderPopulator: inventory '" + inventory.name + "' has " + inventory.myStickers.Count + " stickers.");
+
+        // A scene object here still works, but a prefab asset from Assets/Prefabs is the right setup
+        if (stickerSlotPrefab.gameObject.scene.IsValid())
+        {
+            Debug.LogWarning("BinderPopulator: the Sticker Slot Prefab is an object in the scene, not a prefab asset. " +
+                             "Drag it into Assets/Prefabs and use that prefab instead.");
+        }
+
+        // 1. Remove the hand-placed stickers. They're switched off first (layouts ignore switched-off
+        //    objects) and are NOT moved out of the page, because moving UI out of the Canvas changes its size.
         foreach (GameObject page in stickerPages)
         {
             if (page == null) continue;
 
-            foreach (RaritySort old in page.GetComponentsInChildren<RaritySort>(true))
+            foreach (Sort old in page.GetComponentsInChildren<Sort>(true))
             {
-                old.transform.SetParent(null); // detach first so positions are counted correctly
+                old.gameObject.SetActive(false);
                 Destroy(old.gameObject);
             }
         }
@@ -59,10 +73,13 @@ public class BinderPopulator : MonoBehaviour
                 break;
             }
 
-            RaritySort slot = Instantiate(stickerSlotPrefab, stickerPages[pageIndex].transform);
+            Sort slot = Instantiate(stickerSlotPrefab, stickerPages[pageIndex].transform, false);
+            slot.gameObject.SetActive(true); // in case the template was switched off
             slot.Setup(owned);
             count++;
         }
+
+        Debug.Log("BinderPopulator: created " + count + " sticker slots.");
 
         // 3. Refresh the grid layouts
         foreach (GameObject page in stickerPages)

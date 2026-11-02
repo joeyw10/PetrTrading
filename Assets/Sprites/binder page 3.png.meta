@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 4bc0d27a4c29a4f1aa58a2315bfcbbfb
+guid: c1e0aadfda7a14fc29adab49dd2432dc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6555575649291838755
-    second: Cards_0
-  - first:
-      213: -1636742031616846006
-    second: Cards_1
-  - first:
-      213: -7557494978891415441
-    second: Cards_2
-  - first:
-      213: 6220208007999549204
-    second: Cards_3
+      213: -2021271181019369291
+    second: binder page 3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,57 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cards_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 219
-        width: 152
-        height: 201
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dda52cd0eaae505a0800000000000000
-      internalID: -6555575649291838755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cards_1
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 219
-        width: 152
-        height: 201
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a47d6884bcf1949e0800000000000000
-      internalID: -1636742031616846006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cards_2
+      name: binder page 3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 152
-        height: 201
+        width: 365
+        height: 508
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f600167ab526e1790800000000000000
-      internalID: -7557494978891415441
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Cards_3
-      rect:
-        serializedVersion: 2
-        x: 169
-        y: 0
-        width: 152
-        height: 201
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 41f6ad92a3e925650800000000000000
-      internalID: 6220208007999549204
+      spriteID: 5b03b9ce19003f3e0800000000000000
+      internalID: -2021271181019369291
       vertices: []
       indices: 
       edges: []
@@ -236,10 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cards_0: -6555575649291838755
-      Cards_1: -1636742031616846006
-      Cards_2: -7557494978891415441
-      Cards_3: 6220208007999549204
+      binder page 3_0: -2021271181019369291
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -152,7 +152,7 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
 
     // ---------- Filtering + sorting ----------
     // Position of a sticker in the book's ORIGINAL order (page by page)
-    private int NativeOrder(RaritySort sticker)
+    private int NativeOrder(Sort sticker)
     {
         int pageIndex = 0;
         if (sticker.originalParent != null)
@@ -183,12 +183,12 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         bool searchOn = _searchText.Length > 0;
         bool anyOn = rarityFilterOn || _favoritesOnly || _newestFirst || searchOn;
 
-        RaritySort[] allStickers = transform.parent.GetComponentsInChildren<RaritySort>(true);
+        Sort[] allStickers = transform.parent.GetComponentsInChildren<Sort>(true);
 
         if (!anyOn)
         {
             // Nothing selected: send every sticker back to its native page and spot
-            foreach (RaritySort sticker in allStickers)
+            foreach (Sort sticker in allStickers)
             {
                 if (sticker == null) continue;
                 sticker.transform.SetParent(sticker.originalParent, false);
@@ -199,8 +199,8 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         else
         {
             // 1. Keep only the stickers that pass the filters; hide the rest
-            List<RaritySort> matches = new List<RaritySort>();
-            foreach (RaritySort sticker in allStickers)
+            List<Sort> matches = new List<Sort>();
+            foreach (Sort sticker in allStickers)
             {
                 if (sticker == null) continue;
 
@@ -216,7 +216,7 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
             }
 
             // 2. Order them: newest first if the Newest button is on, otherwise the book's normal order
-            IEnumerable<RaritySort> ordered;
+            IEnumerable<Sort> ordered;
             if (_newestFirst)
             {
                 // To flip to oldest first, change OrderByDescending to OrderBy.
@@ -230,7 +230,7 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
             // 3. Deal them out into the page grids, stickersPerPage at a time
             int perPage = Mathf.Max(1, stickersPerPage);
             int count = 0;
-            foreach (RaritySort sticker in ordered)
+            foreach (Sort sticker in ordered)
             {
                 int pageIndex = count / perPage;
 
