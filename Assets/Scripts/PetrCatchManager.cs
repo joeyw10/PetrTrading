@@ -10,6 +10,7 @@ public class PetrCatchManager : MonoBehaviour
     public GameObject stickerDetectedPanel;
 
     public Inventory inventory;
+    public ButtonSound buttonSound;
 
     public void ChooseCommonAnt()
     {
@@ -93,6 +94,10 @@ public class PetrCatchManager : MonoBehaviour
             if (sticker.stickerInfo != null)
             {
                 inventory.addSticker(sticker.stickerInfo);
+                if (buttonSound != null)
+{
+    buttonSound.PlayCatchSuccessSound();
+}
 
                 Debug.Log("Added to inventory: " +
                           sticker.stickerInfo.stickerName);
@@ -105,12 +110,16 @@ public class PetrCatchManager : MonoBehaviour
             sticker.CatchSuccessfully();
         }
         else
-        {
-            catchResultText.text =
-                "Catch failed! Try using a different ant!";
+{
+    catchResultText.text =
+        "Catch failed! The Petr escaped! Try a different ant next time";
+        if (buttonSound != null)
+{
+    buttonSound.PlayCatchFailureSound();
+}
 
-            sticker.HideActionButtons();
-        }
+    sticker.CatchSuccessfully();
+}
 
         catchResultPanel.SetActive(true);
     }

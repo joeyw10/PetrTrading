@@ -1,14 +1,20 @@
 
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using TMPro;
 
-public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
+public class PetrStickerClick : MonoBehaviour
 {
     public GameObject catchButton;
     public GameObject ignoreButton;
     public GameObject stickerDetectedPanel;
     public TMP_Text stickerDetectedText;
+    public Image detectedStickerImage;
+    public ButtonSound buttonSound;
+
+    [Header("Automatic Detection")]
+    public Transform playerMarker;
+    public float detectionRadius = 200f;
 
     public enum StickerType
     {
@@ -22,18 +28,55 @@ public class PetrStickerClick : MonoBehaviour, IPointerClickHandler
 
     private static PetrStickerClick selectedSticker;
 
-    // Do not hide shared buttons in Start().
-    // Another sticker spawning should not affect the open panel.
+    void Update()
+    {
+        // Only detect a sticker when no other sticker is selected.
+        if (selectedSticker != null)
+        {
+            return;
+        }
 
-    public void OnPointerClick(PointerEventData eventData)
+        if (playerMarker == null)
+        {
+            return;
+        }
+
+        // Compare the sticker's screen position with the player marker.
+        Vector2 stickerPosition =
+            RectTransformUtility.WorldToScreenPoint(
+                null, transform.position);
+
+        Vector2 markerPosition =
+            RectTransformUtility.WorldToScreenPoint(
+                null, playerMarker.position);
+
+        float distance = Vector2.Distance(
+            stickerPosition, markerPosition);
+
+        if (distance <= detectionRadius)
+        {
+            DetectSticker();
+        }
+    }
+
+    void DetectSticker()
     {
         selectedSticker = this;
 
         stickerDetectedPanel.SetActive(true);
+        if (buttonSound != null)
+{
+    buttonSound.PlayDetectionMusic();
+}
+        Image myImage = GetComponent<Image>();
+
+if (detectedStickerImage != null && myImage != null)
+{
+    detectedStickerImage.sprite = myImage.sprite;
+}
 
         stickerDetectedText.text =
-            stickerInfo.stickerName +
-            " detected! What should we do?";
+            stickerInfo.stickerName + " detected!";
 
         catchButton.SetActive(true);
         ignoreButton.SetActive(true);
