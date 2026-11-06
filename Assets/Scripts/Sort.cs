@@ -86,14 +86,31 @@ public class Sort : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData)
+{
+    if (stickerData != null)
     {
-        if (stickerData != null)
+        // Check whether the user is in the Trading scene
+        if (SceneManager.GetActiveScene().name == "Trading")
         {
-            // 1. Pass this sticker's ScriptableObject to the bridge
-            StickerDataBridge.SelectedSticker = stickerData;
+            // Find the Trading script in the scene
+            Trading trading = FindFirstObjectByType<Trading>();
 
-            // 2. Open your Sticker Info scene (Make sure name matches exactly)
+            if (trading != null)
+            {
+                // Pass the selected sticker to Trading.cs
+                trading.SelectSticker(stickerData);
+            }
+            else
+            {
+                Debug.LogError("Trading script not found in the Trading scene.");
+            }
+        }
+        else
+        {
+            // Keep the original behavior in other scenes
+            StickerDataBridge.SelectedSticker = stickerData;
             SceneManager.LoadScene("Sticker Info");
         }
     }
+}
 }
