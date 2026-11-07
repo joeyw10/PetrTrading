@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Trading : MonoBehaviour
 {
     public Inventory inventory;
     public GameObject firstPopup;
+    public GameObject stickerselection;
     public GameObject profile;
     public GameObject requestOne;
     public GameObject requestTwo;
@@ -31,6 +33,8 @@ public class Trading : MonoBehaviour
     public GameObject cancel;
     public GameObject confirm;
     public GameObject checkmark;
+    public GameObject selectedStickerImage;
+public GameObject stickerSelectionPanel;
 
     public void OpenPopupOne()
     {
@@ -47,10 +51,16 @@ public class Trading : MonoBehaviour
     
         requestOne.SetActive(true);
         profile.SetActive(true);
-        option.SetActive(true);
+        
+        //option.SetActive(true);
         
 
 
+    }
+
+    public void Openstickerselection()
+    {
+        stickerselection.SetActive(true);
     }
 
     public void have()
@@ -145,6 +155,22 @@ public class Trading : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    public void SelectSticker(StickerInfo selectedSticker)
+{
+    if (selectedSticker == null)
+        return;
+
+    // Display the selected sticker's image
+    Image image = selectedStickerImage.GetComponent<Image>();
+    image.sprite = selectedSticker.stickerImage;
+
+    // Make the selected sticker visible
+    selectedStickerImage.SetActive(true);
+
+    // Close the sticker selection panel
+    stickerSelectionPanel.SetActive(false);
+}
 
 
 }
