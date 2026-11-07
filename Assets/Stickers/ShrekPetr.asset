@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
   m_Name: ShrekPetr
   m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
-  stickerName: Shrek
   stickerImage: {fileID: 2299814176775322642, guid: 09c20248cd5134264bd7b93759ccfb23, type: 3}
+  rarity: Legendary
+  stickerName: Shrek
   description: ogres are like onions, they have rings or something
-  rarity: Common
   stickerPrefab: {fileID: 6791299735109238954, guid: 7c03b4b36675349c59d253f5dd2b78fa, type: 3}

@@ -11,11 +11,11 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     public float swipeThreshold = 50f;
 
     [Header("Binder Backgrounds")]
-    [Tooltip("Element 0 = Binder_1stPG_0, Element 1 = Binder_2nd...")]
+    [Tooltip("Element 0 = the first page. Element 1 = every page in the middle. Element 2 = the last page.")]
     public Sprite[] binderBackgroundSprites;
 
     [Header("Sticker Pages")]
-    [Tooltip("Drag your Page1 and Page2 GameObjects here in order.")]
+    [Tooltip("The pages already in the scene (Page 1, Page 2, Page 3). BinderPopulator adds more automatically when the player owns more stickers than fit.")]
     public GameObject[] stickerPages;
 
     [Tooltip("How many stickers fit on one page (a 2x2 grid = 4).")]
@@ -42,9 +42,14 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     private bool _newestFirst = false;
     private string _searchText = "";
 
+    private void Awake()
+    {
+        // Found here (not in Start) so BinderPopulator can hand over pages at any time
+        _binderImage = GetComponent<Image>();
+    }
+
     private void Start()
     {
-        _binderImage = GetComponent<Image>();
         UpdatePageVisuals();
         UpdateButtonLooks();
 
@@ -57,6 +62,32 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     {
         _searchText = text == null ? "" : text.Trim().ToLower();
         ApplyFilters();
+    }
+
+    // ---------- Pages ----------
+    // Called by BinderPopulator once it has made as many pages as the player's stickers need
+    public void SetPages(GameObject[] pages)
+    {
+        stickerPages = pages;
+        _currentPageIndex = Mathf.Clamp(_currentPageIndex, 0, Mathf.Max(0, pages.Length - 1));
+        UpdatePageVisuals();
+    }
+
+    // First page = sprite 0, last page = sprite 2, every page in between = sprite 1
+    private Sprite GetBackgroundSprite(int pageIndex)
+    {
+        if (binderBackgroundSprites == null || binderBackgroundSprites.Length == 0) return null;
+
+        int lastPage = (stickerPages != null) ? stickerPages.Length - 1 : 0;
+
+        int spriteIndex;
+        if (pageIndex <= 0) spriteIndex = 0;
+        else if (pageIndex >= lastPage) spriteIndex = 2;
+        else spriteIndex = 1;
+
+        // Fewer sprites than expected? Use the closest one that exists
+        spriteIndex = Mathf.Min(spriteIndex, binderBackgroundSprites.Length - 1);
+        return binderBackgroundSprites[spriteIndex];
     }
 
     // ---------- Swiping ----------
@@ -83,8 +114,7 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
 
     private void OnSwipeLeft()
     {
-        int maxPages = Mathf.Min(binderBackgroundSprites.Length, stickerPages.Length);
-        if (_currentPageIndex < maxPages - 1)
+        if (stickerPages != null && _currentPageIndex < stickerPages.Length - 1)
         {
             _currentPageIndex++;
             UpdatePageVisuals();
@@ -103,9 +133,10 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
     private void UpdatePageVisuals()
     {
         // 1. Update the Binder Background Frame
-        if (binderBackgroundSprites != null && _currentPageIndex < binderBackgroundSprites.Length && _binderImage != null)
+        if (_binderImage != null)
         {
-            _binderImage.sprite = binderBackgroundSprites[_currentPageIndex];
+            Sprite sprite = GetBackgroundSprite(_currentPageIndex);
+            if (sprite != null) _binderImage.sprite = sprite;
         }
 
         // 2. Turn on ONLY the active page
@@ -169,7 +200,7 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         return pageIndex * 1000 + sticker.originalSiblingIndex;
     }
 
-    // One place that combines rarity filter + favorites filter + newest sort
+    // One place that combines rarity filter + favorites filter + search + newest sort
     private void ApplyFilters()
     {
         if (rarityDropdown == null || stickerPages == null || stickerPages.Length == 0)
@@ -184,6 +215,12 @@ public class BinderSwipeController : MonoBehaviour, IBeginDragHandler, IDragHand
         bool anyOn = rarityFilterOn || _favoritesOnly || _newestFirst || searchOn;
 
         Sort[] allStickers = transform.parent.GetComponentsInChildren<Sort>(true);
+
+        // Stickers on a page that hasn't been shown yet haven't saved their home spot; do it before moving anything
+        foreach (Sort sticker in allStickers)
+        {
+            if (sticker != null) sticker.RememberHome();
+        }
 
         if (!anyOn)
         {

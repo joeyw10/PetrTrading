@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NasaPetrInfo
   m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
   stickerImage: {fileID: -5683848338632816945, guid: 340d2b26f1c77334d98c82f7826572ad, type: 3}
-  rarity: Rare
+  rarity: Epic
   stickerName: NASA Petr
   description: The first Petr to travel to the moon
   stickerPrefab: {fileID: 8087935714581614866, guid: 088b858e373664013a2ca704226f0cf5, type: 3}

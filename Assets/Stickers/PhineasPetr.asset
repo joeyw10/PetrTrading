@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91927db1ac793400d8ae701c4d497bbd, type: 3}
   m_Name: PhineasPetr
   m_EditorClassIdentifier: Assembly-CSharp::StickerInfo
-  stickerName: Phineas
   stickerImage: {fileID: -4752969409569859754, guid: 772a9bdcb23ca456b9d1aa9b56e09897, type: 3}
+  rarity: Epic
+  stickerName: Phineas
   description: i know what we're gonna do today ferb!
-  rarity: Rare
   stickerPrefab: {fileID: 931791256794975317, guid: 242e206596a234aa6acdaff87b4c7cbf, type: 3}
