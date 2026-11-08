@@ -36,9 +36,15 @@ public class Trading : MonoBehaviour
     public GameObject selectedStickerImage;
 public GameObject stickerSelectionPanel;
 
+public GameObject requestbutton;
+
+public GameObject stickerslot;
+
+
     public void OpenPopupOne()
     {
         firstPopup.SetActive(true);
+        requestbutton.SetActive(false);
         
     }
 
@@ -60,6 +66,7 @@ public GameObject stickerSelectionPanel;
 
     public void Openstickerselection()
     {
+        stickerslot.SetActive(false);
         stickerselection.SetActive(true);
     }
 
@@ -133,22 +140,35 @@ public GameObject stickerSelectionPanel;
     public void Cancel()
     {
         cancel.SetActive(true);
+        stickerslot.SetActive(false);
+        requestOne.SetActive(false);
+        requestTwo.SetActive(false);
+        profile.SetActive(false);
     }
 
     public void Checkmark()
     {
         checkmark.SetActive(true);
+        stickerslot.SetActive(false);
+        requestOne.SetActive(false);
+        requestTwo.SetActive(false);
+        profile.SetActive(false);
     }
 
     public void Confirm()
     {
         confirm.SetActive(true);
         checkmark.SetActive(false);
+        
     }
 
     public void Back()
     {
         checkmark.SetActive(false);
+        stickerslot.SetActive(true);
+        requestOne.SetActive(true);
+        requestTwo.SetActive(true);
+        profile.SetActive(true);
     }
 
     public void Home(string name)
@@ -170,6 +190,7 @@ public GameObject stickerSelectionPanel;
 
     // Close the sticker selection panel
     stickerSelectionPanel.SetActive(false);
+    stickerslot.SetActive(true);
 }
 
 
