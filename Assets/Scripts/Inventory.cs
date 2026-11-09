@@ -254,4 +254,40 @@ public class Inventory : ScriptableObject
         SaveCount(PacksKey, stickerPacks);
     }
 
+    public List<StickerInfo> GetThreeRandomStickers()
+    {
+    List<StickerInfo> available = new List<StickerInfo>();
+    List<StickerInfo> selected = new List<StickerInfo>();
+
+    if (database == null || database.allStickers == null)
+        {
+        Debug.LogWarning("Sticker Database is missing!");
+        return selected;
+        }
+
+    // Copy all valid stickers from the database
+    foreach (StickerInfo sticker in database.allStickers)
+        {
+        if (sticker != null)
+        {
+            available.Add(sticker);
+        }
+        }
+
+    // Pick up to 3 unique stickers
+    int amount = Mathf.Min(3, available.Count);
+
+    for (int i = 0; i < amount; i++)
+        {
+        int randomIndex = Random.Range(0, available.Count);
+
+        selected.Add(available[randomIndex]);
+
+        // Prevent duplicate selections
+        available.RemoveAt(randomIndex);
+        }
+
+    return selected;
+    }
+
 }
