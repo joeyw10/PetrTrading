@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sticker
-  stickerPack: {fileID: 7805916580749155896, guid: b17fd0975155041b3b4f180b25d48939, type: 3}
   randomizeStickers: {fileID: 11400000, guid: be354858cb9a747f2bf369e1b92be893, type: 2}
 --- !u!114 &7059502012609487727
 MonoBehaviour:
@@ -119,5 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0910df3a67b436f92ee9b91dd17a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sticker
-  stickerPack: {fileID: 0}
   randomizeStickers: {fileID: 0}
