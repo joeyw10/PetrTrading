@@ -1653,6 +1653,7 @@ MonoBehaviour:
   playerOfferPrefab: {fileID: 8087935714581614866, guid: 088b858e373664013a2ca704226f0cf5, type: 3}
   secondSlot: {fileID: 0}
   playerOfferOne: {fileID: 0}
+  playerOfferedSticker: {fileID: 0}
   option: {fileID: 1409736469}
   option2: {fileID: 398029466}
   stickerOne: {fileID: 301927348}
@@ -4150,6 +4151,7 @@ MonoBehaviour:
   playerOfferPrefab: {fileID: 0}
   secondSlot: {fileID: 0}
   playerOfferOne: {fileID: 0}
+  playerOfferedSticker: {fileID: 0}
   option: {fileID: 0}
   option2: {fileID: 0}
   stickerOne: {fileID: 0}
