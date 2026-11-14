@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8362407775867985232, guid: b9cced86564b24013b54dfac1337bfae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8976693359869970960, guid: b9cced86564b24013b54dfac1337bfae, type: 3}
       propertyPath: m_SpriteState.m_PressedSprite

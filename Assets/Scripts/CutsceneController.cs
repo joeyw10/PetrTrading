@@ -33,7 +33,7 @@ public class CutsceneController : MonoBehaviour
     }
 
     public void Tutorial() {
-        SceneManager.LoadScene("Tutorial2");
+        SceneManager.LoadScene("Tutorial 1");
     }
 
     public void addPetr() {
