@@ -24,6 +24,9 @@ public class Trading : MonoBehaviour
     public Transform secondSlot;
     public GameObject playerOfferOne;
 
+    // The sticker selected by the player to trade away
+    public StickerInfo playerOfferedSticker;
+
     [Header("Options")]
     public GameObject option;
     public GameObject option2;
@@ -136,10 +139,11 @@ public class Trading : MonoBehaviour
         checkmark.SetActive(false);
     }
 
-    // Adds the bot's sticker to the player's inventory.
+    // Completes the trade and updates the player's inventory.
     public void CompleteTrade()
     {
         Debug.Log("COMPLETE TRADE FUNCTION WAS CALLED!");
+
         if (inventory == null)
         {
             Debug.LogError("Inventory is not assigned!");
@@ -158,20 +162,35 @@ public class Trading : MonoBehaviour
             return;
         }
 
+        if (playerOfferedSticker == null)
+        {
+            Debug.LogError("No player sticker was selected for trading!");
+            return;
+        }
+
         if (tradeBot.tradeCompleted)
         {
             Debug.LogWarning("This trade has already been completed!");
             return;
         }
 
+        // Remove the sticker offered by the player.
+        inventory.removeSticker(playerOfferedSticker);
+
+        // Add the bot's sticker to the player's inventory.
         inventory.addSticker(tradeBot.currentStickerInfo);
 
+        // Mark the trade as completed.
         tradeBot.tradeCompleted = true;
 
         confirm.SetActive(false);
 
+        Debug.Log("Traded away: " + playerOfferedSticker.stickerName);
         Debug.Log("Successfully received: " +
                   tradeBot.currentStickerInfo.stickerName);
+
+        // Clear the selected sticker.
+        playerOfferedSticker = null;
     }
 
     public void Back()
@@ -191,6 +210,9 @@ public class Trading : MonoBehaviour
     {
         if (selectedSticker == null)
             return;
+
+        // Remember which sticker the player is offering.
+        playerOfferedSticker = selectedSticker;
 
         Image image = selectedStickerImage.GetComponent<Image>();
 
