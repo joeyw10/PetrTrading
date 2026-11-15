@@ -12,14 +12,39 @@ public class StickerDatabase : ScriptableObject
     public List<StickerInfo> allStickers;
 
     // Finds a sticker by its ASSET name (the file name in the Project window)
-    public StickerInfo GetByName(string assetName)
+   
+public StickerInfo GetByName(string assetName)
+{
+    foreach (StickerInfo sticker in allStickers)
     {
-        foreach (StickerInfo sticker in allStickers)
+        if (sticker != null &&
+            (sticker.name == assetName ||
+             sticker.stickerName == assetName))
         {
-            if (sticker != null && sticker.name == assetName) return sticker;
+            return sticker;
         }
-        return null;
     }
+
+    return null;
+}
+
+public StickerInfo GetByPrefab(GameObject prefab)
+{
+    if (prefab == null || allStickers == null)
+        return null;
+
+    foreach (StickerInfo sticker in allStickers)
+    {
+        if (sticker != null && sticker.stickerPrefab == prefab)
+        {
+            return sticker;
+        }
+    }
+
+    return null;
+}
+
+
 
     // Any random sticker
     public StickerInfo GetRandom()
