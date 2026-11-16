@@ -92,7 +92,7 @@ public class PetrStickerRequestUI : MonoBehaviour
         if (hideImageCoroutine != null)
             StopCoroutine(hideImageCoroutine);
 
-        hideImageCoroutine = StartCoroutine(HideImageAfterDelay(8f));
+        hideImageCoroutine = StartCoroutine(HideImageAfterDelay(5f));
     }
 
     private IEnumerator HideImageAfterDelay(float delay)
