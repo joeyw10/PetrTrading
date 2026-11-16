@@ -221,4 +221,6 @@ public class Trading : MonoBehaviour
         selectedStickerImage.SetActive(true);
         stickerSelectionPanel.SetActive(false);
     }
+
+    
 }
