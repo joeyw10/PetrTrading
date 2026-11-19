@@ -7,6 +7,7 @@ public class StickerPack : MonoBehaviour
     [SerializeField] private Animator packAnimator;
     [SerializeField] private StickerRandomizer randomizeStickers;
     [SerializeField] private GameObject stash;
+    [SerializeField] private AudioSource audio;
 
     StickerInfo sticker1;
     StickerInfo sticker2;
@@ -32,6 +33,7 @@ public class StickerPack : MonoBehaviour
 
     private void OnMouseDown()
     {
+        audio.Play();
         if(packOpened == false) {
         if (!CanOpen()) return; // missing setup: log an error and keep the pack unopened
         ChooseStickers();
@@ -95,30 +97,5 @@ public class StickerPack : MonoBehaviour
         stash.SetActive(true);
     }
 
-    // this didn't work so im giving up
-    // public void SwapStickers() {
-    //     if(stickerPrefab1.transform.position.z == 5) {
-    //         stickerPrefab1.transform.position += new Vector3(0, 0, -3);
-    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-    //     } else if(stickerPrefab2.transform.position.z == 5) {
-    //         stickerPrefab2.transform.position += new Vector3(0, 0, -3);
-    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-    //     } else if(stickerPrefab3.transform.position.z == 5) {
-    //         stickerPrefab3.transform.position += new Vector3(0, 0, -3);
-    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab4.transform.position += new Vector3(0, 0, 1);
-    //     } else if(stickerPrefab4.transform.position.z == 5) {
-    //         stickerPrefab4.transform.position += new Vector3(0, 0, -3);
-    //         stickerPrefab3.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab2.transform.position += new Vector3(0, 0, 1);
-    //         stickerPrefab1.transform.position += new Vector3(0, 0, 1);
-    //     } else {
-    //         Debug.Log("Broken.");
-    //     }
-    // }
+    
 }

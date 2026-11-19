@@ -4,6 +4,7 @@ public class Stash : MonoBehaviour
 {
     [SerializeField] HomeController home;
     [SerializeField] Inventory inventory;
+    [SerializeField] AudioSource audio;
     //[SerializeField] private GameObject stickerPack;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +14,7 @@ public class Stash : MonoBehaviour
 
     // Update is called once per frame
     private void OnMouseDown() {
+        audio.Play();
         CheckStickerPacks();
     }
 

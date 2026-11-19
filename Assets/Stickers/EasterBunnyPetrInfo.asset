@@ -16,4 +16,4 @@ MonoBehaviour:
   rarity: Legendary
   stickerName: Easter Bunny Petr
   description: How did you find me?! I do not come out as often!
-  stickerPrefab: {fileID: 0}
+  stickerPrefab: {fileID: 4379314929513683535, guid: 91b8697b532d0e242aaa076799a364f8, type: 3}
