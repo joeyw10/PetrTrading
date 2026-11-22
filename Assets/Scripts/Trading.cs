@@ -51,6 +51,13 @@ public class Trading : MonoBehaviour
     public GameObject requestbutton;
     public GameObject requestbutton2;
 
+    public GameObject parentpopup;
+
+    public void CloseParentpopup()
+    {
+        parentpopup.SetActive(false);
+    }
+
     private void Start()
     {
         UpdateCheckmarkButton();
@@ -185,9 +192,10 @@ public class Trading : MonoBehaviour
             return;
         }
 
-        if (tradeBot.currentStickerInfo == null)
+        if (tradeBot.offeredStickers == null ||
+            tradeBot.offeredStickers.Count == 0)
         {
-            Debug.LogError("Bot sticker information is missing!");
+            Debug.LogError("The bot has no stickers to offer!");
             return;
         }
 
@@ -203,26 +211,86 @@ public class Trading : MonoBehaviour
             return;
         }
 
-        // Remove all stickers offered by the player.
+        // Make sure all player-offered stickers are valid.
         for (int i = 0; i < currentOfferCount; i++)
         {
-            if (playerOfferedStickers[i] != null)
+            if (playerOfferedStickers[i] == null)
             {
-                inventory.removeSticker(playerOfferedStickers[i]);
+                Debug.LogError("A player-offered sticker is missing!");
+                return;
             }
         }
 
-        // Add the bot's sticker to the player's inventory.
-        inventory.addSticker(tradeBot.currentStickerInfo);
+        // Make sure all bot-offered stickers are valid.
+        foreach (StickerInfo sticker in tradeBot.offeredStickers)
+        {
+            if (sticker == null)
+            {
+                Debug.LogError("A bot-offered sticker is missing!");
+                return;
+            }
+        }
+
+        // Check that the player still owns every offered sticker.
+        Dictionary<StickerInfo, int> requiredStickers =
+            new Dictionary<StickerInfo, int>();
+
+        for (int i = 0; i < currentOfferCount; i++)
+        {
+            StickerInfo sticker = playerOfferedStickers[i];
+
+            if (!requiredStickers.ContainsKey(sticker))
+                requiredStickers[sticker] = 0;
+
+            requiredStickers[sticker]++;
+        }
+
+        foreach (KeyValuePair<StickerInfo, int> entry in requiredStickers)
+        {
+            int ownedCount = 0;
+
+            foreach (StickerInfo ownedSticker in inventory.myStickers)
+            {
+                if (ownedSticker == entry.Key)
+                    ownedCount++;
+            }
+
+            if (ownedCount < entry.Value)
+            {
+                Debug.LogError(
+                    "You no longer own enough copies of " +
+                    entry.Key.stickerName
+                );
+                return;
+            }
+        }
+
+        // Remove all stickers offered by the player.
+        for (int i = 0; i < currentOfferCount; i++)
+        {
+            inventory.removeSticker(playerOfferedStickers[i]);
+        }
+
+        // Add ALL stickers offered by the bot.
+        foreach (StickerInfo sticker in tradeBot.offeredStickers)
+        {
+            inventory.addSticker(sticker);
+        }
 
         // Mark trade as completed.
         tradeBot.tradeCompleted = true;
 
         confirm.SetActive(false);
 
-        Debug.Log("Successfully traded " + currentOfferCount + " stickers!");
+        Debug.Log(
+            "Trade completed! Player gave " +
+            currentOfferCount +
+            " stickers and received " +
+            tradeBot.offeredStickers.Count +
+            " stickers."
+        );
 
-        // Clear all offer slots.
+        // Clear all player offer slots.
         for (int i = 0; i < 3; i++)
         {
             playerOfferedStickers[i] = null;
@@ -315,7 +383,6 @@ public class Trading : MonoBehaviour
         // Increase the offer count.
         currentOfferCount++;
 
-        // Update checkmark button.
         UpdateCheckmarkButton();
 
         // Close the selection panel.
