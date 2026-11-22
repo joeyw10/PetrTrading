@@ -41,6 +41,8 @@ public class Trading : MonoBehaviour
     public GameObject confirm;
     public GameObject checkmark;
 
+    public Button checkmarkButton;
+
     [Header("Sticker Selection")]
     public GameObject selectedStickerImage;
     public GameObject stickerSelectionPanel;
@@ -49,6 +51,18 @@ public class Trading : MonoBehaviour
     public GameObject requestbutton;
     public GameObject requestbutton2;
 
+    private void Start()
+    {
+        UpdateCheckmarkButton();
+    }
+
+    private void UpdateCheckmarkButton()
+    {
+        if (checkmarkButton != null)
+        {
+            checkmarkButton.interactable = currentOfferCount > 0;
+        }
+    }
 
     public void OpenPopupOne()
     {
@@ -137,6 +151,12 @@ public class Trading : MonoBehaviour
 
     public void Checkmark()
     {
+        if (currentOfferCount == 0)
+        {
+            Debug.Log("Add at least one sticker before continuing!");
+            return;
+        }
+
         checkmark.SetActive(true);
         requestOne.SetActive(false);
         requestTwo.SetActive(false);
@@ -215,6 +235,9 @@ public class Trading : MonoBehaviour
         }
 
         currentOfferCount = 0;
+
+        // Disable checkmark again.
+        UpdateCheckmarkButton();
     }
 
     public void Back()
@@ -230,75 +253,73 @@ public class Trading : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
-    
-
-
-public void SelectSticker(StickerInfo selectedSticker)
-{
-    if (selectedSticker == null)
-        return;
-
-    if (currentOfferCount >= 3)
+    public void SelectSticker(StickerInfo selectedSticker)
     {
-        Debug.Log("You can only add 3 stickers!");
-        return;
-    }
+        if (selectedSticker == null)
+            return;
 
-    // Count how many copies of this sticker the player owns.
-    int ownedCount = 0;
-
-    foreach (StickerInfo sticker in inventory.myStickers)
-    {
-        if (sticker == selectedSticker)
+        if (currentOfferCount >= 3)
         {
-            ownedCount++;
+            Debug.Log("You can only add 3 stickers!");
+            return;
         }
-    }
 
-    // Count how many copies of this sticker are already offered.
-    int offeredCount = 0;
+        // Count how many copies of this sticker the player owns.
+        int ownedCount = 0;
 
-    foreach (StickerInfo sticker in playerOfferedStickers)
-    {
-        if (sticker == selectedSticker)
+        foreach (StickerInfo sticker in inventory.myStickers)
         {
-            offeredCount++;
+            if (sticker == selectedSticker)
+            {
+                ownedCount++;
+            }
         }
+
+        // Count how many copies are already offered.
+        int offeredCount = 0;
+
+        foreach (StickerInfo sticker in playerOfferedStickers)
+        {
+            if (sticker == selectedSticker)
+            {
+                offeredCount++;
+            }
+        }
+
+        // Prevent offering more copies than the player owns.
+        if (offeredCount >= ownedCount)
+        {
+            Debug.Log("You don't have another copy of this sticker!");
+            return;
+        }
+
+        // Save the selected sticker.
+        playerOfferedStickers[currentOfferCount] = selectedSticker;
+
+        // Create the sticker in the next available slot.
+        GameObject newSticker = Instantiate(
+            playerOfferPrefab,
+            playerOfferSlots[currentOfferCount]
+        );
+
+        // Set its image.
+        Image image = newSticker.GetComponent<Image>();
+
+        if (image != null)
+        {
+            image.sprite = selectedSticker.stickerImage;
+        }
+
+        playerOfferObjects[currentOfferCount] = newSticker;
+
+        // Increase the offer count.
+        currentOfferCount++;
+
+        // Update checkmark button.
+        UpdateCheckmarkButton();
+
+        // Close the selection panel.
+        stickerSelectionPanel.SetActive(false);
+        selectedStickerImage.SetActive(false);
     }
-
-    // Prevent offering more copies than the player owns.
-    if (offeredCount >= ownedCount)
-    {
-        Debug.Log("You don't have another copy of this sticker!");
-        return;
-    }
-
-    // Save the selected sticker.
-    playerOfferedStickers[currentOfferCount] = selectedSticker;
-
-    // Create the sticker in the next available slot.
-    GameObject newSticker = Instantiate(
-        playerOfferPrefab,
-        playerOfferSlots[currentOfferCount]
-    );
-
-    // Set its image.
-    Image image = newSticker.GetComponent<Image>();
-
-    if (image != null)
-    {
-        image.sprite = selectedSticker.stickerImage;
-    }
-
-    playerOfferObjects[currentOfferCount] = newSticker;
-
-    // Increase the offer count.
-    currentOfferCount++;
-
-    // Close the selection panel.
-    stickerSelectionPanel.SetActive(false);
-    selectedStickerImage.SetActive(false);
-}
-
-
 }

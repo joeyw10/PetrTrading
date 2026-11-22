@@ -1872,6 +1872,7 @@ MonoBehaviour:
   cancel: {fileID: 1212760339}
   confirm: {fileID: 671001740}
   checkmark: {fileID: 444669530}
+  checkmarkButton: {fileID: 0}
   selectedStickerImage: {fileID: 409680474}
   stickerSelectionPanel: {fileID: 1783922647}
   requestbutton: {fileID: 297642781}
@@ -4781,6 +4782,7 @@ MonoBehaviour:
   cancel: {fileID: 0}
   confirm: {fileID: 0}
   checkmark: {fileID: 0}
+  checkmarkButton: {fileID: 0}
   selectedStickerImage: {fileID: 0}
   stickerSelectionPanel: {fileID: 0}
   requestbutton: {fileID: 0}
@@ -9642,7 +9644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1917417723
 MonoBehaviour:
   m_ObjectHideFlags: 0
