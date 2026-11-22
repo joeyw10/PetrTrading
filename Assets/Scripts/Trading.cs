@@ -21,11 +21,14 @@ public class Trading : MonoBehaviour
 
     [Header("Player Offer")]
     public GameObject playerOfferPrefab;
-    public Transform secondSlot;
-    public GameObject playerOfferOne;
 
-    // The sticker selected by the player to trade away
-    public StickerInfo playerOfferedSticker;
+    public Transform[] playerOfferSlots = new Transform[3];
+
+    public GameObject[] playerOfferObjects = new GameObject[3];
+
+    public StickerInfo[] playerOfferedStickers = new StickerInfo[3];
+
+    private int currentOfferCount = 0;
 
     [Header("Options")]
     public GameObject option;
@@ -62,6 +65,12 @@ public class Trading : MonoBehaviour
 
     public void Openstickerselection()
     {
+        if (currentOfferCount >= 3)
+        {
+            Debug.Log("You can only add 3 stickers!");
+            return;
+        }
+
         stickerselection.SetActive(true);
     }
 
@@ -74,8 +83,6 @@ public class Trading : MonoBehaviour
     {
         option.SetActive(false);
 
-        playerOfferOne = Instantiate(playerOfferPrefab, secondSlot);
-
         Invoke("Confirm", 2f);
         Invoke("stickerOneFalse", 2f);
     }
@@ -85,7 +92,11 @@ public class Trading : MonoBehaviour
         stickerOne.SetActive(false);
         profile.SetActive(false);
 
-        Destroy(playerOfferOne);
+        if (playerOfferObjects[0] != null)
+        {
+            Destroy(playerOfferObjects[0]);
+            playerOfferObjects[0] = null;
+        }
     }
 
     public void dontHave()
@@ -132,14 +143,12 @@ public class Trading : MonoBehaviour
         profile.SetActive(false);
     }
 
-    // Opens the confirmation panel.
     public void Confirm()
     {
         confirm.SetActive(true);
         checkmark.SetActive(false);
     }
 
-    // Completes the trade and updates the player's inventory.
     public void CompleteTrade()
     {
         Debug.Log("COMPLETE TRADE FUNCTION WAS CALLED!");
@@ -162,9 +171,9 @@ public class Trading : MonoBehaviour
             return;
         }
 
-        if (playerOfferedSticker == null)
+        if (currentOfferCount == 0)
         {
-            Debug.LogError("No player sticker was selected for trading!");
+            Debug.LogError("No player stickers were selected!");
             return;
         }
 
@@ -174,23 +183,38 @@ public class Trading : MonoBehaviour
             return;
         }
 
-        // Remove the sticker offered by the player.
-        inventory.removeSticker(playerOfferedSticker);
+        // Remove all stickers offered by the player.
+        for (int i = 0; i < currentOfferCount; i++)
+        {
+            if (playerOfferedStickers[i] != null)
+            {
+                inventory.removeSticker(playerOfferedStickers[i]);
+            }
+        }
 
         // Add the bot's sticker to the player's inventory.
         inventory.addSticker(tradeBot.currentStickerInfo);
 
-        // Mark the trade as completed.
+        // Mark trade as completed.
         tradeBot.tradeCompleted = true;
 
         confirm.SetActive(false);
 
-        Debug.Log("Traded away: " + playerOfferedSticker.stickerName);
-        Debug.Log("Successfully received: " +
-                  tradeBot.currentStickerInfo.stickerName);
+        Debug.Log("Successfully traded " + currentOfferCount + " stickers!");
 
-        // Clear the selected sticker.
-        playerOfferedSticker = null;
+        // Clear all offer slots.
+        for (int i = 0; i < 3; i++)
+        {
+            playerOfferedStickers[i] = null;
+
+            if (playerOfferObjects[i] != null)
+            {
+                Destroy(playerOfferObjects[i]);
+                playerOfferObjects[i] = null;
+            }
+        }
+
+        currentOfferCount = 0;
     }
 
     public void Back()
@@ -206,21 +230,75 @@ public class Trading : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
-    public void SelectSticker(StickerInfo selectedSticker)
+    
+
+
+public void SelectSticker(StickerInfo selectedSticker)
+{
+    if (selectedSticker == null)
+        return;
+
+    if (currentOfferCount >= 3)
     {
-        if (selectedSticker == null)
-            return;
-
-        // Remember which sticker the player is offering.
-        playerOfferedSticker = selectedSticker;
-
-        Image image = selectedStickerImage.GetComponent<Image>();
-
-        image.sprite = selectedSticker.stickerImage;
-
-        selectedStickerImage.SetActive(true);
-        stickerSelectionPanel.SetActive(false);
+        Debug.Log("You can only add 3 stickers!");
+        return;
     }
 
-    
+    // Count how many copies of this sticker the player owns.
+    int ownedCount = 0;
+
+    foreach (StickerInfo sticker in inventory.myStickers)
+    {
+        if (sticker == selectedSticker)
+        {
+            ownedCount++;
+        }
+    }
+
+    // Count how many copies of this sticker are already offered.
+    int offeredCount = 0;
+
+    foreach (StickerInfo sticker in playerOfferedStickers)
+    {
+        if (sticker == selectedSticker)
+        {
+            offeredCount++;
+        }
+    }
+
+    // Prevent offering more copies than the player owns.
+    if (offeredCount >= ownedCount)
+    {
+        Debug.Log("You don't have another copy of this sticker!");
+        return;
+    }
+
+    // Save the selected sticker.
+    playerOfferedStickers[currentOfferCount] = selectedSticker;
+
+    // Create the sticker in the next available slot.
+    GameObject newSticker = Instantiate(
+        playerOfferPrefab,
+        playerOfferSlots[currentOfferCount]
+    );
+
+    // Set its image.
+    Image image = newSticker.GetComponent<Image>();
+
+    if (image != null)
+    {
+        image.sprite = selectedSticker.stickerImage;
+    }
+
+    playerOfferObjects[currentOfferCount] = newSticker;
+
+    // Increase the offer count.
+    currentOfferCount++;
+
+    // Close the selection panel.
+    stickerSelectionPanel.SetActive(false);
+    selectedStickerImage.SetActive(false);
+}
+
+
 }

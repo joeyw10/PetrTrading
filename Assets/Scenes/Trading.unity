@@ -119,6 +119,41 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6044833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6044834}
+  m_Layer: 5
+  m_Name: PlayerStickerSlot1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6044834
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6044833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1917417725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 538.59, y: -260}
+  m_SizeDelta: {x: 100, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &21558324
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +350,41 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 23.255, y: 28.47998}
   m_SizeDelta: {x: 625.88, y: 751.09}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &69464572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69464573}
+  m_Layer: 5
+  m_Name: PlayerStickerSlot1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &69464573
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69464572}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1917417725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -7.48, y: -260}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &87906230
 GameObject:
@@ -1782,10 +1852,19 @@ MonoBehaviour:
   profile: {fileID: 412716384}
   requestOne: {fileID: 2093702383}
   requestTwo: {fileID: 432444409}
-  playerOfferPrefab: {fileID: 8087935714581614866, guid: 088b858e373664013a2ca704226f0cf5, type: 3}
-  secondSlot: {fileID: 0}
-  playerOfferOne: {fileID: 0}
-  playerOfferedSticker: {fileID: 0}
+  playerOfferPrefab: {fileID: 6764237172578768928, guid: 60f06f4a45d822b44963cddb73e4604a, type: 3}
+  playerOfferSlots:
+  - {fileID: 69464573}
+  - {fileID: 1638897715}
+  - {fileID: 6044834}
+  playerOfferObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerOfferedStickers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   option: {fileID: 1409736469}
   option2: {fileID: 398029466}
   stickerOne: {fileID: 301927348}
@@ -4683,9 +4762,18 @@ MonoBehaviour:
   requestOne: {fileID: 0}
   requestTwo: {fileID: 0}
   playerOfferPrefab: {fileID: 0}
-  secondSlot: {fileID: 0}
-  playerOfferOne: {fileID: 0}
-  playerOfferedSticker: {fileID: 0}
+  playerOfferSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerOfferObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerOfferedStickers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   option: {fileID: 0}
   option2: {fileID: 0}
   stickerOne: {fileID: 0}
@@ -7885,6 +7973,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625693213}
   m_CullTransparentMesh: 1
+--- !u!1 &1638897714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1638897715}
+  m_Layer: 5
+  m_Name: PlayerStickerSlot1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1638897715
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638897714}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1917417725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 272.9, y: -260}
+  m_SizeDelta: {x: 100, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1663996878
 GameObject:
   m_ObjectHideFlags: 0
@@ -9570,6 +9693,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 69464573}
+  - {fileID: 1638897715}
+  - {fileID: 6044834}
   - {fileID: 2035621484}
   - {fileID: 1769421694}
   - {fileID: 409680477}
