@@ -4,30 +4,65 @@ using UnityEngine.UI;
 
 public class TradeBotStickerDisplay : MonoBehaviour
 {
-    public Transform spawnLocation;
+    [Header("Bot Sticker Slots")]
+    public Transform[] spawnLocations = new Transform[3];
 
-    private GameObject currentDisplayedSticker;
+    private GameObject[] displayedStickers = new GameObject[3];
 
     public void DisplaySticker(GameObject stickerPrefab)
     {
+        // Keep compatibility with the original single-sticker method
+        ClearDisplay();
+
         if (stickerPrefab == null)
         {
             Debug.LogWarning("Sticker prefab is missing!");
             return;
         }
 
-        // Remove the previous sticker
-        if (currentDisplayedSticker != null)
+        DisplayStickerInSlot(stickerPrefab, 0);
+    }
+
+    public void DisplayStickers(System.Collections.Generic.List<StickerInfo> stickers)
+    {
+        ClearDisplay();
+
+        if (stickers == null)
+            return;
+
+        for (int i = 0; i < stickers.Count && i < 3; i++)
         {
-            Destroy(currentDisplayedSticker);
+            if (stickers[i] == null)
+                continue;
+
+            if (stickers[i].stickerPrefab == null)
+            {
+                Debug.LogWarning(
+                    "Missing sticker prefab for " + stickers[i].stickerName
+                );
+                continue;
+            }
+
+            DisplayStickerInSlot(stickers[i].stickerPrefab, i);
+        }
+    }
+
+    private void DisplayStickerInSlot(GameObject stickerPrefab, int slotIndex)
+    {
+        if (slotIndex >= spawnLocations.Length || spawnLocations[slotIndex] == null)
+        {
+            Debug.LogWarning("Bot sticker slot " + slotIndex + " is not assigned!");
+            return;
         }
 
-        // Instantiate the new sticker
-        currentDisplayedSticker = Instantiate(stickerPrefab, spawnLocation);
+        GameObject newSticker = Instantiate(
+            stickerPrefab,
+            spawnLocations[slotIndex]
+        );
 
         // Convert SpriteRenderer into UI Image if necessary
         SpriteRenderer spriteRenderer =
-            currentDisplayedSticker.GetComponent<SpriteRenderer>();
+            newSticker.GetComponent<SpriteRenderer>();
 
         if (spriteRenderer != null)
         {
@@ -36,15 +71,24 @@ public class TradeBotStickerDisplay : MonoBehaviour
 
             Destroy(spriteRenderer);
 
-            Image uiImage = currentDisplayedSticker.AddComponent<Image>();
+            Image uiImage = newSticker.GetComponent<Image>();
+
+            if (uiImage == null)
+                uiImage = newSticker.AddComponent<Image>();
+
             uiImage.sprite = stickerSprite;
             uiImage.color = stickerColor;
             uiImage.preserveAspect = true;
         }
 
-        // Adjust its UI position and size
+        // Also support prefabs that already contain a child Image
+        Image childImage = newSticker.GetComponentInChildren<Image>();
+
+        if (childImage != null)
+            childImage.preserveAspect = true;
+
         RectTransform rectTransform =
-            currentDisplayedSticker.GetComponent<RectTransform>();
+            newSticker.GetComponent<RectTransform>();
 
         if (rectTransform != null)
         {
@@ -54,6 +98,20 @@ public class TradeBotStickerDisplay : MonoBehaviour
             rectTransform.anchorMin = Vector2.zero;
             rectTransform.anchorMax = Vector2.one;
             rectTransform.sizeDelta = Vector2.zero;
+        }
+
+        displayedStickers[slotIndex] = newSticker;
+    }
+
+    public void ClearDisplay()
+    {
+        for (int i = 0; i < displayedStickers.Length; i++)
+        {
+            if (displayedStickers[i] != null)
+            {
+                Destroy(displayedStickers[i]);
+                displayedStickers[i] = null;
+            }
         }
     }
 }

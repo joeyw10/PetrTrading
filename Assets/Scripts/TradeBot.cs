@@ -14,6 +14,8 @@ public class TradeBot : MonoBehaviour
     public GameObject currentSticker;
     public StickerInfo currentStickerInfo;
 
+    public List<StickerInfo> offeredStickers = new List<StickerInfo>();
+
     public bool tradeCompleted = false;
 
     [Header("Sticker Database")]
@@ -35,8 +37,11 @@ public class TradeBot : MonoBehaviour
 
         tradeCompleted = false;
         currentStickerInfo = null;
+        currentSticker = null;
 
-        // Randomly select an actual sticker prefab
+        offeredStickers.Clear();
+        stickerDisplay.ClearDisplay();
+
         int randomIndex = Random.Range(0, possibleStickers.Count);
 
         currentSticker = possibleStickers[randomIndex];
@@ -47,25 +52,71 @@ public class TradeBot : MonoBehaviour
             return;
         }
 
-        // Display the actual sticker GameObject
-        stickerDisplay.DisplaySticker(currentSticker);
-
-        // Find the matching StickerInfo
         if (database != null)
-{
-    currentStickerInfo = database.GetByPrefab(currentSticker);
-}
+        {
+            currentStickerInfo = database.GetByPrefab(currentSticker);
+        }
 
         if (currentStickerInfo == null)
         {
             Debug.LogWarning(
                 "Could not find StickerInfo for: " + currentSticker.name
             );
+            return;
         }
-        else
+
+        offeredStickers.Add(currentStickerInfo);
+
+        stickerDisplay.DisplaySticker(currentSticker);
+
+        Debug.Log("Bot wants to trade: " + currentStickerInfo.stickerName);
+    }
+
+    public bool AddRequestedSticker(GameObject requestedPrefab)
+    {
+        if (tradeCompleted)
         {
-            Debug.Log("Bot wants to trade: " +
-                      currentStickerInfo.stickerName);
+            Debug.LogWarning("This trade has already been completed!");
+            return false;
         }
+
+        if (offeredStickers.Count >= 3)
+        {
+            Debug.Log("The bot cannot offer more than 3 stickers!");
+            return false;
+        }
+
+        if (requestedPrefab == null)
+        {
+            Debug.LogWarning("Requested sticker prefab is missing!");
+            return false;
+        }
+
+        if (database == null)
+        {
+            Debug.LogWarning("Sticker Database is not assigned!");
+            return false;
+        }
+
+        StickerInfo requestedInfo = database.GetByPrefab(requestedPrefab);
+
+        if (requestedInfo == null)
+        {
+            Debug.LogWarning(
+                "Could not find StickerInfo for: " + requestedPrefab.name
+            );
+            return false;
+        }
+
+        offeredStickers.Add(requestedInfo);
+
+        if (stickerDisplay != null)
+        {
+            stickerDisplay.DisplayStickers(offeredStickers);
+        }
+
+        Debug.Log("Bot added requested sticker: " + requestedInfo.stickerName);
+
+        return true;
     }
 }
