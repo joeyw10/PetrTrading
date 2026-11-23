@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd661dd52b2640a4ae6499797fc20db, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  myStickers: []
+  myStickers:
+  - {fileID: 11400000, guid: 3a0ab9b050b7c46049e4ceb53a640261, type: 2}
   database: {fileID: 11400000, guid: 3c730a3e116ec46c28ce0043179c3110, type: 2}
   commonWeight: 70
   rareWeight: 25
